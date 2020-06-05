@@ -2,10 +2,12 @@ package dev.riyenas.chatbot.web;
 
 import dev.riyenas.chatbot.web.dto.common.ButtonEnum;
 import dev.riyenas.chatbot.web.dto.common.Link;
+import dev.riyenas.chatbot.web.dto.common.ListItem;
 import dev.riyenas.chatbot.web.dto.common.Thumbnail;
 import dev.riyenas.chatbot.web.dto.output.BasicCard;
 import dev.riyenas.chatbot.web.dto.output.Carousel;
 import dev.riyenas.chatbot.web.dto.output.CarouselEnum;
+import dev.riyenas.chatbot.web.dto.output.ListCard;
 import dev.riyenas.chatbot.web.dto.skill.SkillPayload;
 import dev.riyenas.chatbot.web.dto.skill.SkillResponse;
 import dev.riyenas.chatbot.web.dto.skill.SkillResponseData;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 public class KakaoSkillApi {
 
     private final static String IMAGE_URL = "https://img.huffingtonpost.com/asset/5d80cb9a240000d3267c75b7.jpeg?ops=1200_630";
+    private final static String HOMEPAGE_URL = "https://blog.riyenas.dev";
 
     @PostMapping("template")
     public SkillResponse testTemplateSkill(@RequestBody SkillPayload payload) {
@@ -40,6 +43,29 @@ public class KakaoSkillApi {
                                 ButtonEnum.PHONE.action("전화 걸기", "description", "010-1234-5678"),
                                 ButtonEnum.WEBLINK.action("이미지 보기", "description", IMAGE_URL)
                         )
+                ))
+                .addListCard(ListCard.of(
+                        ListItem.of(
+                                "Header",
+                                "description",
+                                HOMEPAGE_URL,
+                                new Link(HOMEPAGE_URL)
+                        ),
+                        Arrays.asList(
+                                ListItem.of(
+                                        "List 1",
+                                        "description",
+                                        HOMEPAGE_URL,
+                                        new Link(HOMEPAGE_URL)
+                                ),
+                                ListItem.of(
+                                        "List 1",
+                                        "description",
+                                        HOMEPAGE_URL,
+                                        new Link(HOMEPAGE_URL)
+                                )
+                        ),
+                        Arrays.asList(ButtonEnum.WEBLINK.action("홈페이지", "description", HOMEPAGE_URL))
                 ))
                 .addCarousel(Carousel.of(
                         CarouselEnum.BASIC_CARD.getValue(),
