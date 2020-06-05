@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/test/")
 public class KakaoSkillApi {
 
+    private final static String IMAGE_URL = "https://blog.riyenas.dev/images/logo.svg";
+
     @PostMapping("template")
     public SkillResponse testTemplateSkill(@RequestBody SkillPayload payload) {
+
         SkillResponse skillResponse = new SkillResponseTemplate()
                 .addSimpleText("test")
-                .addSimpleText("test2");
+                .addSimpleImage(IMAGE_URL,"altText");
 
         return skillResponse;
     }
