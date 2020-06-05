@@ -1,5 +1,6 @@
 package dev.riyenas.chatbot.web.dto.skill;
 
+import dev.riyenas.chatbot.web.dto.output.BasicCard;
 import dev.riyenas.chatbot.web.dto.output.SimpleImage;
 import dev.riyenas.chatbot.web.dto.output.SimpleText;
 import lombok.Getter;
@@ -29,11 +30,19 @@ public class SkillResponseTemplate extends SkillResponse{
         return this;
     }
 
-    public SkillResponse addSimpleImage(String url, String altText) {
+    public SkillResponseTemplate addSimpleImage(String url, String altText) {
         this.template.get("outputs").add(
                 Map.of("simpleImage", new SimpleImage(url, altText))
         );
 
         return this;
     }
+
+    public SkillResponseTemplate addBasicCard(BasicCard basicCard){
+        this.template.get("outputs").add(
+                Map.of("basicCard", basicCard)
+        );
+        return this;
+    }
+
 }
