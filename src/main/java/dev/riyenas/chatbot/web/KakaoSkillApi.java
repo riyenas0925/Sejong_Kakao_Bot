@@ -4,6 +4,8 @@ import dev.riyenas.chatbot.web.dto.common.ButtonEnum;
 import dev.riyenas.chatbot.web.dto.common.Link;
 import dev.riyenas.chatbot.web.dto.common.Thumbnail;
 import dev.riyenas.chatbot.web.dto.output.BasicCard;
+import dev.riyenas.chatbot.web.dto.output.Carousel;
+import dev.riyenas.chatbot.web.dto.output.CarouselEnum;
 import dev.riyenas.chatbot.web.dto.skill.SkillPayload;
 import dev.riyenas.chatbot.web.dto.skill.SkillResponse;
 import dev.riyenas.chatbot.web.dto.skill.SkillResponseData;
@@ -21,7 +23,7 @@ import java.util.Arrays;
 @RequestMapping("/api/v1/test/")
 public class KakaoSkillApi {
 
-    private final static String IMAGE_URL = "https://user-images.githubusercontent.com/32615702/81304219-bc40ce00-90b7-11ea-9a02-eda93ee3600b.jpg";
+    private final static String IMAGE_URL = "https://img.huffingtonpost.com/asset/5d80cb9a240000d3267c75b7.jpeg?ops=1200_630";
 
     @PostMapping("template")
     public SkillResponse testTemplateSkill(@RequestBody SkillPayload payload) {
@@ -35,9 +37,31 @@ public class KakaoSkillApi {
                         new Thumbnail(IMAGE_URL, new Link(IMAGE_URL)),
                         Arrays.asList(
                                 ButtonEnum.MESSAGE.action("메시지", "description", "메시지 입니다"),
-                                ButtonEnum.PHONE.action("전화 걸기", "description", "010-5668-6188"),
+                                ButtonEnum.PHONE.action("전화 걸기", "description", "010-1234-5678"),
                                 ButtonEnum.WEBLINK.action("이미지 보기", "description", IMAGE_URL)
                         )
+                ))
+                .addCarousel(Carousel.of(
+                        CarouselEnum.BASIC_CARD.getValue(),
+                        Arrays.asList(
+                                BasicCard.of(
+                                        "Carousel 1",
+                                        "Description",
+                                        new Thumbnail(IMAGE_URL, new Link(IMAGE_URL)),
+                                        Arrays.asList(
+                                                ButtonEnum.MESSAGE.action("메시지", "description", "메시지 입니다")
+                                        )
+                                ),
+                                BasicCard.of(
+                                        "Carousel 2",
+                                        "Description",
+                                        new Thumbnail(IMAGE_URL, new Link(IMAGE_URL)),
+                                        Arrays.asList(
+                                                ButtonEnum.MESSAGE.action("메시지", "description", "메시지 입니다")
+                                        )
+                                )
+                        )
+
                 ));
 
         return skillResponse;
