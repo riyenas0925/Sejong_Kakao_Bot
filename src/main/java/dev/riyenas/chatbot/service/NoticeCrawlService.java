@@ -8,6 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class NoticeCrawlService {
             .link(new Link(NOTICE_URL))
             .build();
 
+    @Cacheable(value = "sejong")
     public ListCard sejongNoticeCrawl() throws IOException {
         Document doc = Jsoup.connect(NOTICE_URL).get();
         Elements elements = doc.select("body>div>table>tbody>tr");
