@@ -1,5 +1,6 @@
 package dev.riyenas.chatbot.web.dto.skill;
 
+import dev.riyenas.chatbot.web.dto.common.QuickReply;
 import dev.riyenas.chatbot.web.dto.output.*;
 import lombok.Getter;
 import lombok.ToString;
@@ -18,6 +19,7 @@ public class SkillResponseTemplate extends SkillResponse{
         super();
         this.template = new HashMap<>();
         this.template.put("outputs", new ArrayList<>());
+        this.template.put("quickReplies", new ArrayList<>());
     }
 
     public SkillResponseTemplate addSimpleText(String text){
@@ -54,6 +56,16 @@ public class SkillResponseTemplate extends SkillResponse{
         this.template.get("outputs").add(
                 Map.of("carousel", carousel)
         );
+        return this;
+    }
+
+    public SkillResponseTemplate addQuickReplies(List<QuickReply> quickReplies){
+        for(QuickReply quickReply : quickReplies){
+            this.template.get("quickReplies").add(
+                quickReply
+            );
+        }
+
         return this;
     }
 
