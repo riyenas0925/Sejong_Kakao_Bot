@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.web.dto.skill;
+package dev.riyenas.chatbot.domain;
 
 import lombok.Getter;
 import lombok.ToString;

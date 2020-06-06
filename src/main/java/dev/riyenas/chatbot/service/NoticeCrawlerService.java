@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class NoticeCrawlService {
+public class NoticeCrawlerService {
     private final static String NOTICE_URL = "http://board.sejong.ac.kr/boardlist.do?bbsConfigFK=333";
     private final static String SEJONG_IMG_URL = "https://img.huffingtonpost.com/asset/5d80cb9a240000d3267c75b7.jpeg?ops=1200_630";
     private final static ListItem LIST_CARD_HEADER = ListItem.builder()
@@ -28,7 +28,7 @@ public class NoticeCrawlService {
             .build();
 
     @Cacheable(value = "sejong")
-    public ListCard sejongNoticeCrawl() throws IOException {
+    public ListCard sejongNoticeCrawler() throws IOException {
         Document doc = Jsoup.connect(NOTICE_URL).get();
         Elements elements = doc.select("body>div>table>tbody>tr");
 

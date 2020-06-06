@@ -1,9 +1,9 @@
 package dev.riyenas.chatbot.web;
 
-import dev.riyenas.chatbot.service.NoticeCrawlService;
+import dev.riyenas.chatbot.service.NoticeCrawlerService;
 import dev.riyenas.chatbot.web.dto.common.QuickReplyEnum;
-import dev.riyenas.chatbot.web.dto.skill.SkillResponse;
-import dev.riyenas.chatbot.web.dto.skill.SkillResponseTemplate;
+import dev.riyenas.chatbot.domain.SkillResponse;
+import dev.riyenas.chatbot.domain.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +19,13 @@ import java.util.Arrays;
 @RequestMapping("/api/v1/sejong/")
 public class KakaoSkillApi {
 
-    private final NoticeCrawlService noticeCrawlService;
+    private final NoticeCrawlerService noticeCrawlerService;
 
     @PostMapping("notice")
     public SkillResponse sejongNotice() throws IOException {
         return new SkillResponseTemplate()
                 .addSimpleText("세종대학교 공지사항 입니다.")
-                .addListCard(noticeCrawlService.sejongNoticeCrawl())
+                .addListCard(noticeCrawlerService.sejongNoticeCrawler())
                 .addQuickReplies(
                         Arrays.asList(
                                 QuickReplyEnum.MESSAGE.action("일반공지", "일반공지 공지사항 알려줘"),
