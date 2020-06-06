@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.web.dto.skill;
+package dev.riyenas.chatbot.domain;
 
 import dev.riyenas.chatbot.web.dto.common.QuickReply;
 import dev.riyenas.chatbot.web.dto.output.*;

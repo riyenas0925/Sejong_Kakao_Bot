@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class NoticeCrawlTest {
-    private static Logger log = LoggerFactory.getLogger(NoticeCrawlTest.class);
+public class NoticeCrawlerTest {
+    private static Logger log = LoggerFactory.getLogger(NoticeCrawlerTest.class);
     private final static String NOTICE_URL = "http://board.sejong.ac.kr/boardlist.do?bbsConfigFK=333";
 
     @Test
