@@ -1,11 +1,11 @@
 package dev.riyenas.chatbot.web;
 
-import dev.riyenas.chatbot.domain.SkillPayload;
-import dev.riyenas.chatbot.service.NoticeCrawlerService;
-import dev.riyenas.chatbot.service.NoticeTypeEnum;
-import dev.riyenas.chatbot.web.dto.common.QuickReplyEnum;
-import dev.riyenas.chatbot.domain.SkillResponse;
-import dev.riyenas.chatbot.domain.SkillResponseTemplate;
+import dev.riyenas.chatbot.web.payload.SkillPayload;
+import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
+import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
+import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
+import dev.riyenas.chatbot.web.payload.SkillResponse;
+import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.PostMapping;

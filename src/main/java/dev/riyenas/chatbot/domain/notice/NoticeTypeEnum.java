@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.service;
+package dev.riyenas.chatbot.domain.notice;
 
 import java.util.Arrays;
 

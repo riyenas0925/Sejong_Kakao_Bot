@@ -1,9 +1,10 @@
-package dev.riyenas.chatbot.service;
+package dev.riyenas.chatbot.service.notice;
 
-import dev.riyenas.chatbot.web.dto.common.ButtonEnum;
-import dev.riyenas.chatbot.web.dto.common.Link;
-import dev.riyenas.chatbot.web.dto.common.ListItem;
-import dev.riyenas.chatbot.web.dto.output.ListCard;
+import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
+import dev.riyenas.chatbot.web.skill.common.ButtonEnum;
+import dev.riyenas.chatbot.web.skill.common.Link;
+import dev.riyenas.chatbot.web.skill.common.ListItem;
+import dev.riyenas.chatbot.web.skill.output.ListCard;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

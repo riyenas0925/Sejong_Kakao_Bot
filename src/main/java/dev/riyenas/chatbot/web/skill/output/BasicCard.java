@@ -1,7 +1,7 @@
-package dev.riyenas.chatbot.web.dto.output;
+package dev.riyenas.chatbot.web.skill.output;
 
-import dev.riyenas.chatbot.web.dto.common.Button;
-import dev.riyenas.chatbot.web.dto.common.Thumbnail;
+import dev.riyenas.chatbot.web.skill.common.Button;
+import dev.riyenas.chatbot.web.skill.common.Thumbnail;
 import lombok.Getter;
 import lombok.ToString;
 
