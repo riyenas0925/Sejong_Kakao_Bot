@@ -1,20 +1,14 @@
 package dev.riyenas.chatbot.web;
 
-import dev.riyenas.chatbot.domain.SkillPayload;
-import dev.riyenas.chatbot.service.NoticeCrawlerService;
-import dev.riyenas.chatbot.service.NoticeTypeEnum;
-import dev.riyenas.chatbot.web.dto.common.QuickReplyEnum;
-import dev.riyenas.chatbot.domain.SkillResponse;
-import dev.riyenas.chatbot.domain.SkillResponseTemplate;
+import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
+import dev.riyenas.chatbot.service.notice.NoticeService;
+import dev.riyenas.chatbot.web.payload.SkillPayload;
+import dev.riyenas.chatbot.web.payload.SkillResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 
 @Log4j2
@@ -23,7 +17,13 @@ import java.util.Map;
 @RequestMapping("/api/v1/sejong/")
 public class KakaoSkillApi {
 
+    private final NoticeService noticeService;
     private final NoticeCrawlerService noticeCrawlerService;
+
+    @GetMapping("notice/crawl")
+    public void test() throws IOException {
+        noticeService.saveAll(noticeCrawlerService.noticeCrawlAll());
+    }
 
     @PostMapping("notice")
     public SkillResponse sejongNotice(@RequestBody SkillPayload payload) throws IOException {
@@ -33,9 +33,10 @@ public class KakaoSkillApi {
 
         log.info(noticeTitle + " : " + payload.toString());
 
+        /*
         return new SkillResponseTemplate()
                 .addSimpleText("세종대학교 " + noticeTitle + " 공지사항 입니다.")
-                .addListCard(noticeCrawlerService.sejongNoticeCrawler(NoticeTypeEnum.findByTitle(noticeTitle)))
+                .addListCard(noticeService.findByTypeLimit5(NoticeTypeEnum.findByTitle(noticeTitle)))
                 .addQuickReplies(
                         Arrays.asList(
                                 QuickReplyEnum.MESSAGE.action("일반", "일반 공지사항 알려줘"),
@@ -47,5 +48,7 @@ public class KakaoSkillApi {
                                 QuickReplyEnum.MESSAGE.action("교내모집", "교내모집 공지사항 알려줘")
                         )
                 );
+         */
+        return null;
     }
 }

@@ -9,8 +9,8 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       naming:
-        physical-strategy: org.hibernate..boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create-drop
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create
     show-sql: true
 
   datasource:

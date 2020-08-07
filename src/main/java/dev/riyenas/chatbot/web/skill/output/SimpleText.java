@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.web.dto.output;
+package dev.riyenas.chatbot.web.skill.output;
 
 import lombok.Getter;
 import lombok.ToString;

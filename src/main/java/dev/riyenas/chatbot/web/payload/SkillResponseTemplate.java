@@ -1,7 +1,7 @@
-package dev.riyenas.chatbot.domain;
+package dev.riyenas.chatbot.web.payload;
 
-import dev.riyenas.chatbot.web.dto.common.QuickReply;
-import dev.riyenas.chatbot.web.dto.output.*;
+import dev.riyenas.chatbot.web.skill.common.QuickReply;
+import dev.riyenas.chatbot.web.skill.output.*;
 import lombok.Getter;
 import lombok.ToString;
 

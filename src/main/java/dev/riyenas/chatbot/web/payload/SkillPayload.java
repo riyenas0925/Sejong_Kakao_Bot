@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.domain;
+package dev.riyenas.chatbot.web.payload;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
