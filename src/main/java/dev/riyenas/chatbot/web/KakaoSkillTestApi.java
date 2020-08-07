@@ -1,5 +1,9 @@
 package dev.riyenas.chatbot.web;
 
+import dev.riyenas.chatbot.web.payload.SkillPayload;
+import dev.riyenas.chatbot.web.payload.SkillResponse;
+import dev.riyenas.chatbot.web.payload.SkillResponseData;
+import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.ButtonEnum;
 import dev.riyenas.chatbot.web.skill.common.Link;
 import dev.riyenas.chatbot.web.skill.common.ListItem;
@@ -8,10 +12,6 @@ import dev.riyenas.chatbot.web.skill.output.BasicCard;
 import dev.riyenas.chatbot.web.skill.output.Carousel;
 import dev.riyenas.chatbot.web.skill.output.CarouselEnum;
 import dev.riyenas.chatbot.web.skill.output.ListCard;
-import dev.riyenas.chatbot.web.payload.SkillPayload;
-import dev.riyenas.chatbot.web.payload.SkillResponse;
-import dev.riyenas.chatbot.web.payload.SkillResponseData;
-import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
