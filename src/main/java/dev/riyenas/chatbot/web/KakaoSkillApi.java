@@ -1,14 +1,18 @@
 package dev.riyenas.chatbot.web;
 
+import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
 import dev.riyenas.chatbot.web.payload.SkillPayload;
 import dev.riyenas.chatbot.web.payload.SkillResponse;
+import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
+import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
 @Log4j2
@@ -33,10 +37,9 @@ public class KakaoSkillApi {
 
         log.info(noticeTitle + " : " + payload.toString());
 
-        /*
         return new SkillResponseTemplate()
                 .addSimpleText("세종대학교 " + noticeTitle + " 공지사항 입니다.")
-                .addListCard(noticeService.findByTypeLimit5(NoticeTypeEnum.findByTitle(noticeTitle)))
+                .addListCard(noticeService.findByTypeDesc(NoticeTypeEnum.findByTitle(noticeTitle)))
                 .addQuickReplies(
                         Arrays.asList(
                                 QuickReplyEnum.MESSAGE.action("일반", "일반 공지사항 알려줘"),
@@ -48,7 +51,5 @@ public class KakaoSkillApi {
                                 QuickReplyEnum.MESSAGE.action("교내모집", "교내모집 공지사항 알려줘")
                         )
                 );
-         */
-        return null;
     }
 }

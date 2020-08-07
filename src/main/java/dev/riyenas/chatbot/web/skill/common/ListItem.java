@@ -1,5 +1,6 @@
 package dev.riyenas.chatbot.web.skill.common;
 
+import dev.riyenas.chatbot.domain.notice.Notice;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -22,5 +23,9 @@ public class ListItem {
 
     public static ListItem of(String title, String description, String imageUrl, Link link) {
         return new ListItem(title, description, imageUrl, link);
+    }
+
+    public static ListItem of(Notice notice) {
+        return new ListItem(notice.getTitle(), notice.getWriter(), null, new Link(notice.getLink()));
     }
 }

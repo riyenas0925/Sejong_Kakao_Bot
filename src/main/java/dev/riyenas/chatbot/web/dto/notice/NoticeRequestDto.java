@@ -1,17 +1,13 @@
 package dev.riyenas.chatbot.web.dto.notice;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.riyenas.chatbot.domain.notice.Notice;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Getter
 @NoArgsConstructor
