@@ -19,6 +19,7 @@ public class Notice {
 
     private String title;
     private String writer;
+    private Long index;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
@@ -31,10 +32,11 @@ public class Notice {
     private NoticeTypeEnum type;
 
     @Builder
-    public Notice(Long id, String title, String writer, Date date, NoticeTypeEnum type, String link) {
+    public Notice(Long id, String title, String writer, Long index, Date date, NoticeTypeEnum type, String link) {
         this.id = id;
         this.title = title;
         this.writer = writer;
+        this.index = index;
         this.date = date;
         this.type = type;
         this.link = link;
