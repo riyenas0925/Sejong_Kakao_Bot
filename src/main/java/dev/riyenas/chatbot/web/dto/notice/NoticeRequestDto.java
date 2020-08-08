@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 public class NoticeRequestDto {
     private String title;
     private String writer;
+    private Long index;
     private String date;
     private String link;
     private NoticeTypeEnum type;
@@ -24,15 +25,17 @@ public class NoticeRequestDto {
                 .title(title)
                 .writer(writer)
                 .date(new SimpleDateFormat("yyyy.MM.dd").parse(date))
+                .index(index)
                 .link(link)
                 .type(type)
                 .build();
     }
 
     @Builder
-    public NoticeRequestDto(String title, String writer, String date, String link, NoticeTypeEnum type) {
+    public NoticeRequestDto(String title, String writer, Long index, String date, String link, NoticeTypeEnum type) {
         this.title = title;
         this.writer = writer;
+        this.index = index;
         this.date = date;
         this.link = link;
         this.type = type;

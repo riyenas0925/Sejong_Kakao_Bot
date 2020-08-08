@@ -48,12 +48,14 @@ public class NoticeCrawlerService {
             String url = element.selectFirst("a").attr("abs:href")
                     .replace("boardview", "mboardviewmobile");
             String date = element.selectFirst(".date").text();
+            Long index = Long.valueOf(element.selectFirst(".index").text());
 
             notices.add(
                     NoticeRequestDto.builder()
                             .title(title)
                             .date(date)
                             .link(url)
+                            .index(index)
                             .writer(writer)
                             .type(noticeType)
                             .build()

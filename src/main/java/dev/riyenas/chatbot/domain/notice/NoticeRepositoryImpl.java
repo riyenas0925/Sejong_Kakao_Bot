@@ -17,7 +17,7 @@ public class NoticeRepositoryImpl extends QuerydslRepositorySupport implements N
 
         return from(notice)
                 .where(notice.type.eq(type))
-                .orderBy(notice.date.desc())
+                .orderBy(notice.index.desc())
                 .limit(5L)
                 .fetch();
     }
@@ -27,7 +27,7 @@ public class NoticeRepositoryImpl extends QuerydslRepositorySupport implements N
         final QNotice notice = QNotice.notice;
 
         return from(notice)
-                .orderBy(notice.date.desc())
+                .orderBy(notice.index.desc())
                 .limit(5L)
                 .fetch();
     }
