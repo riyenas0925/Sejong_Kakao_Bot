@@ -1,14 +1,17 @@
 package dev.riyenas.chatbot.web;
 
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
+import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
+import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseDto;
 import dev.riyenas.chatbot.web.payload.SkillPayload;
 import dev.riyenas.chatbot.web.payload.SkillResponse;
 import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.codehaus.jettison.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -23,6 +26,7 @@ public class KakaoSkillApi {
 
     private final NoticeService noticeService;
     private final NoticeCrawlerService noticeCrawlerService;
+    private final AirPollutionService airPollutionService;
 
     @GetMapping("notice/crawl")
     public void test() throws IOException {
@@ -30,7 +34,7 @@ public class KakaoSkillApi {
     }
 
     @PostMapping("notice")
-    public SkillResponse sejongNotice(@RequestBody SkillPayload payload) throws IOException {
+    public SkillResponse sejongNotice(@RequestBody SkillPayload payload) {
 
         Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
         String noticeTitle = params.get("sys_sejong_notice_type");
@@ -51,5 +55,19 @@ public class KakaoSkillApi {
                                 QuickReplyEnum.MESSAGE.action("교내모집", "교내모집 공지사항 알려줘")
                         )
                 );
+    }
+
+    @PostMapping("airPollution")
+    public SkillResponse airPollution(@RequestBody SkillPayload payload) throws IOException, JSONException {
+
+        Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
+        String location = params.get("sys_air_station_location");
+
+        log.info("미세먼지(" + location + ") : " + payload.toString());
+
+        AirPollutionResponseDto responseDto = new AirPollutionResponseDto(airPollutionService.getAirPollutionData(location));
+
+        return new SkillResponseTemplate()
+                .addSimpleText(location + "\n\n" + responseDto.getMessage());
     }
 }
