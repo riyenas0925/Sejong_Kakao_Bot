@@ -5,7 +5,6 @@ import dev.riyenas.chatbot.domain.notice.NoticeRepository;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.web.skill.common.Button;
 import dev.riyenas.chatbot.web.skill.common.ButtonEnum;
-import dev.riyenas.chatbot.web.skill.common.Link;
 import dev.riyenas.chatbot.web.skill.common.ListItem;
 import dev.riyenas.chatbot.web.skill.output.ListCard;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,9 @@ import java.util.stream.Collectors;
 public class NoticeService {
     private final NoticeRepository noticeRepository;
 
-    private final static String NOTICE_BASE_URL = "http://board.sejong.ac.kr/boardlist.do?bbsConfigFK=";
-    private final static String SEJONG_IMG_URL = "http://www.sejong.ac.kr/sogood_sm/2018_05_30/main_vi/img4.jpg";
+    private final static String NOTICE_PC_BASE_URL = "http://board.sejong.ac.kr/boardlist.do?bbsConfigFK=";
+    private final static String NOTICE_MOBILE_BASE_URL = "http://board.sejong.ac.kr/mboardlistmobile.do?bbsConfigFK=";
+    private final static String SEJONG_IMG_URL = "https://img.huffingtonpost.com/asset/5d80cb9a240000d3267c75b7.jpeg?ops=1200_630";
 
     @Transactional
     public Long save(Notice notice) {
@@ -49,11 +49,10 @@ public class NoticeService {
         ListItem header = ListItem.builder()
                 .title("세종대학교 " + type.getTitle() + " 공지사항")
                 .imageUrl(SEJONG_IMG_URL)
-                .link(new Link(NOTICE_BASE_URL + type.getFk()))
                 .build();
 
         List<Button> buttons = Arrays.asList(
-                ButtonEnum.WEBLINK.action("더보기", NOTICE_BASE_URL + type.getFk())
+                ButtonEnum.WEBLINK.action("더보기", NOTICE_MOBILE_BASE_URL + type.getFk())
         );
 
         return new ListCard(header, lists, buttons);

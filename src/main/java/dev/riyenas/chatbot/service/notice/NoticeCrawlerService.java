@@ -45,7 +45,8 @@ public class NoticeCrawlerService {
         for(Element element : elements){
             String title = element.selectFirst(".subject").text();
             String writer = element.selectFirst(".writer").text();
-            String url = element.selectFirst("a").attr("abs:href");
+            String url = element.selectFirst("a").attr("abs:href")
+                    .replace("boardview", "mboardviewmobile");
             String date = element.selectFirst(".date").text();
 
             notices.add(
