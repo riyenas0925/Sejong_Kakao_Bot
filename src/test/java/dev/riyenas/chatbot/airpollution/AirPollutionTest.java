@@ -1,11 +1,12 @@
 package dev.riyenas.chatbot.airpollution;
 
+import dev.riyenas.chatbot.domain.airpollution.AirPollution;
+import dev.riyenas.chatbot.domain.airpollution.AirPollutionGradeEnum;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionRequestDto;
 import org.codehaus.jettison.json.JSONException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,7 @@ public class AirPollutionTest {
     private AirPollutionService airPollutionService;
 
     @Test
-    @DisplayName(value = "미세먼지 API JSON 응답을 DTO에 매핑")
-    public void apiTest() throws IOException, JSONException {
+    public void API_JSON_응답을_DTO에_매핑() throws IOException, JSONException {
         //given
         String json = "{\n" +
                 "  \"list\": [\n" +
@@ -72,5 +72,22 @@ public class AirPollutionTest {
         //that
         Assertions.assertEquals(requestDto.get_returnType(), "json");
         Assertions.assertEquals(requestDto.getDataTime(), "2020-08-08 18:00");
+    }
+
+    @Test
+    public void 등급이_공백으로_올때_처리(){
+        //given
+        String grade = "";
+
+        //when
+        Long gradeIdLong = AirPollution.stringToLong(grade);
+        String gradeIdString = grade;
+
+        AirPollutionGradeEnum gradeEnum = AirPollutionGradeEnum.of(gradeIdLong);
+        AirPollutionGradeEnum gradeEnum1 = AirPollutionGradeEnum.of(grade);
+
+        //that
+        Assertions.assertEquals(AirPollutionGradeEnum.UNDEFINED, gradeEnum);
+        Assertions.assertEquals(AirPollutionGradeEnum.UNDEFINED, gradeEnum1);
     }
 }
