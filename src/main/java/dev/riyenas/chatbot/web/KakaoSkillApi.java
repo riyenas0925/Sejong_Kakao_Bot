@@ -4,11 +4,12 @@ import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
-import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseDto;
+import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseCarouselDto;
 import dev.riyenas.chatbot.web.payload.SkillPayload;
 import dev.riyenas.chatbot.web.payload.SkillResponse;
 import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
+import dev.riyenas.chatbot.web.skill.output.Carousel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.codehaus.jettison.json.JSONException;
@@ -65,9 +66,10 @@ public class KakaoSkillApi {
 
         log.info("미세먼지(" + location + ") : " + payload.toString());
 
-        AirPollutionResponseDto responseDto = new AirPollutionResponseDto(airPollutionService.getAirPollutionData(location));
-
+        AirPollutionResponseCarouselDto responseCarousel = new AirPollutionResponseCarouselDto(airPollutionService.getAirPollutionData(location));
+        
         return new SkillResponseTemplate()
-                .addSimpleText(location + "\n\n" + responseDto.getMessage());
+                .addSimpleText(location + " 미세먼지 현황")
+                .addCarousel(Carousel.of(responseCarousel));
     }
 }
