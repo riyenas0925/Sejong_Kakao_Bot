@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @ToString
 public class AirPollutionResponseCarouselDto {
-    private final static String IMAGE_URL = "https://blog.toss.im/wp-content/uploads/2019/04/toss_ondemand_insurance_01.png";
+    private final static String IMAGE_URL = "https://user-images.githubusercontent.com/32615702/89729364-f2536c80-da6f-11ea-84e4-25330db3f230.png";
 
     private String type;
     private List<BasicCard> items;
@@ -27,12 +27,12 @@ public class AirPollutionResponseCarouselDto {
                                 .append("❇ PM10 : ")
                                 .append(airPollution.getPm10Value())
                                 .append(" (")
-                                .append(airPollution.getPm10Grade().getTitle())
+                                .append(airPollution.getPm10Grade1h().getTitle())
                                 .append(")\n")
                                 .append("✳ PM2.5 : ")
                                 .append(airPollution.getPm25Value())
                                 .append(" (")
-                                .append(airPollution.getPm25Grade().getTitle())
+                                .append(airPollution.getPm25Grade1h().getTitle())
                                 .append(")")
                                 .toString(),
                         new Thumbnail(IMAGE_URL, null),
@@ -45,12 +45,12 @@ public class AirPollutionResponseCarouselDto {
                                 .append("❇ 미세먼지 (PM10)")
                                 .append("\n농도 : ")
                                 .append(airPollution.getPm10Value())
-                                .append("㎍/㎥\n1시간 등급 : ")
+                                .append("㎍/㎥\n등급 : ")
                                 .append(airPollution.getPm10Grade1h().getTitle())
                                 .append("\n\n✳ 초미세먼지 (PM2.5)")
                                 .append("\n농도 : ")
                                 .append(airPollution.getPm25Value())
-                                .append("㎍/㎥\n1시간 등급 : ")
+                                .append("㎍/㎥\n등급 : ")
                                 .append(airPollution.getPm25Grade1h().getTitle())
                                 .append("\n\n☁ 통합대기환경")
                                 .append("\n수치 : ")
