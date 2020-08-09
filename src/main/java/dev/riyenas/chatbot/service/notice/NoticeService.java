@@ -25,7 +25,7 @@ public class NoticeService {
 
     private final static String NOTICE_PC_BASE_URL = "http://board.sejong.ac.kr/boardlist.do?bbsConfigFK=";
     private final static String NOTICE_MOBILE_BASE_URL = "http://board.sejong.ac.kr/mboardlistmobile.do?bbsConfigFK=";
-    private final static String SEJONG_IMG_URL = "https://img.huffingtonpost.com/asset/5d80cb9a240000d3267c75b7.jpeg?ops=1200_630";
+    private final static String SEJONG_IMG_URL = "https://user-images.githubusercontent.com/32615702/89729343-ac96a400-da6f-11ea-8d22-67665c9047a8.jpg";
 
     @Transactional
     public Long save(Notice notice) {

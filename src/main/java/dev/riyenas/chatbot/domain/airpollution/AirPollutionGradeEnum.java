@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum AirPollutionGradeEnum {
     UNDEFINED("측정값 없음", 0L, "측정값이 없습니다."),
-    GOOD("좋음", 1L, "실외활동 아주 좋아요"),
-    AVERAGE("보통", 2L, "실외활동 괜찮아요"),
-    BAD("나쁨", 3L, "실외활동 하지 않아요"),
-    VERY_BAD("매우 나쁨", 4L, "실외활동 안돼요");
+    GOOD("좋음", 1L, "실외 활동하기에 아주 좋아요"),
+    AVERAGE("보통", 2L, "실외 활동하기에 괜찮아요"),
+    BAD("나쁨", 3L, "실외 활동을 자제해 주세요"),
+    VERY_BAD("매우 나쁨", 4L, "실외 활동은 안돼요");
 
     private String title;
     private Long id;
