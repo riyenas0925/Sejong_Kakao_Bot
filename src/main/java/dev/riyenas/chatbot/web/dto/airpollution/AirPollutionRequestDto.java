@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @ToString
 @Getter
 @NoArgsConstructor
@@ -83,16 +85,16 @@ public class AirPollutionRequestDto {   private String _returnType;
 
     public AirPollution toEntity() {
         return AirPollution.builder()
-                .pm10Value(Long.valueOf(pm10Value))
-                .pm10Value24(Long.valueOf(pm10Value24))
-                .pm10Grade(AirPollutionGradeEnum.of(Long.valueOf(pm10Grade)))
-                .pm10Grade1h(AirPollutionGradeEnum.of(Long.valueOf(pm10Grade1h)))
-                .pm25Value(Long.valueOf(pm25Value))
-                .pm25Value24(Long.valueOf(pm25Value24))
-                .pm25Grade(AirPollutionGradeEnum.of(Long.valueOf(pm25Grade)))
-                .pm25Grade1h(AirPollutionGradeEnum.of(Long.valueOf(pm25Grade1h)))
-                .khaiValue(Long.valueOf(khaiValue))
-                .khaiGrade(AirPollutionGradeEnum.of(Long.valueOf(khaiGrade)))
+                .pm10Value(pm10Value)
+                .pm10Value24(pm10Value24)
+                .pm10Grade(AirPollutionGradeEnum.of(pm10Grade))
+                .pm10Grade1h(AirPollutionGradeEnum.of(pm10Grade1h))
+                .pm25Value(pm25Value)
+                .pm25Value24(pm25Value24)
+                .pm25Grade(AirPollutionGradeEnum.of(pm25Grade))
+                .pm25Grade1h(AirPollutionGradeEnum.of(pm25Grade1h))
+                .khaiValue(khaiValue)
+                .khaiGrade(AirPollutionGradeEnum.of(khaiGrade))
                 .build();
     }
 }
