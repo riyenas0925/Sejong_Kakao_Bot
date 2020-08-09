@@ -1,5 +1,6 @@
 package dev.riyenas.chatbot.web.skill.output;
 
+import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseDto;
 import dev.riyenas.chatbot.web.skill.common.Button;
 import dev.riyenas.chatbot.web.skill.common.Thumbnail;
 import lombok.Getter;
@@ -37,5 +38,9 @@ public class BasicCard {
 
     public static BasicCard of(String title, String description, Thumbnail thumbnail) {
         return new BasicCard(title, description, thumbnail, null);
+    }
+
+    public static BasicCard of(AirPollutionResponseDto dto) {
+        return new BasicCard(dto.getTitle(), dto.getDescription(), dto.getThumbnail(), null);
     }
 }
