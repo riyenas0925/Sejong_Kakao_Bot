@@ -43,4 +43,8 @@ public class BasicCard {
     public static BasicCard of(AirPollutionResponseDto dto) {
         return new BasicCard(dto.getTitle(), dto.getDescription(), dto.getThumbnail(), null);
     }
+
+    public static BasicCard of(String description) {
+        return new BasicCard(null, description, null, null);
+    }
 }

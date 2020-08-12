@@ -1,9 +1,12 @@
 package dev.riyenas.chatbot.web;
 
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
+import dev.riyenas.chatbot.domain.restaurant.Menu;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
+import dev.riyenas.chatbot.service.restaurant.RestaurantCrawlerService;
+import dev.riyenas.chatbot.service.restaurant.RestaurantService;
 import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseCarouselDto;
 import dev.riyenas.chatbot.web.payload.SkillPayload;
 import dev.riyenas.chatbot.web.payload.SkillResponse;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -28,6 +32,8 @@ public class KakaoSkillApi {
     private final NoticeService noticeService;
     private final NoticeCrawlerService noticeCrawlerService;
     private final AirPollutionService airPollutionService;
+    private final RestaurantCrawlerService restaurantCrawlerService;
+    private final RestaurantService restaurantService;
 
     @GetMapping("notice/crawl")
     public void test() throws IOException {
@@ -71,5 +77,23 @@ public class KakaoSkillApi {
         return new SkillResponseTemplate()
                 .addSimpleText(location + " 미세먼지 현황")
                 .addCarousel(Carousel.of(responseCarousel));
+    }
+
+    @GetMapping("restaurant/crawl")
+    public void restaurantCrawl() throws IOException {
+        restaurantCrawlerService.restaurantCrawler();
+    }
+
+    @PostMapping("restaurant")
+    public SkillResponse restaurant(@RequestBody SkillPayload payload) {
+        Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
+        String restaurant = params.get("sys_restaurant_type");
+
+        log.info("식당(" + restaurant + ") : " + payload.toString());
+
+        List<Menu> menus = restaurantService.findAll();
+
+        return new SkillResponseTemplate()
+                .addSimpleText(menus.toString());
     }
 }
