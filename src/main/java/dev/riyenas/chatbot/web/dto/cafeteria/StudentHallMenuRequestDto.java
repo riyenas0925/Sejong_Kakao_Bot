@@ -1,7 +1,7 @@
 package dev.riyenas.chatbot.web.dto.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Getter
 @ToString
-public class StudentHallRequestDto {
+public class StudentHallMenuRequestDto {
     private String name;
     private String price;
     private Date date;
@@ -28,7 +28,7 @@ public class StudentHallRequestDto {
     }
 
     @Builder
-    public StudentHallRequestDto(String name, String price, CafeteriaTypeEnum type) {
+    public StudentHallMenuRequestDto(String name, String price, CafeteriaTypeEnum type) {
         this.name = name;
         this.price = price;
         this.date = new Date();

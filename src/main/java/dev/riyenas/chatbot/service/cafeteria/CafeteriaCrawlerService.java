@@ -1,9 +1,9 @@
 package dev.riyenas.chatbot.service.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
-import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
 import dev.riyenas.chatbot.domain.cafeteria.CafeteriaGroupEnum;
 import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.Menu;
+import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,6 @@ public class CafeteriaCrawlerService {
 
                 List<Menu> menus = cafeteria.crawlMenu(url);
                 menuRepository.saveAll(menus);
-
-                log.info(menuRepository.findAll().toString());
             }
         }
     }

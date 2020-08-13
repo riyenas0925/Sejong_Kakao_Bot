@@ -2,7 +2,7 @@ package dev.riyenas.chatbot.domain.cafeteria;
 
 import dev.riyenas.chatbot.web.dto.cafeteria.GardenViewMenuRequestDto;
 import dev.riyenas.chatbot.web.dto.cafeteria.GunjagwanMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallMenuRequestDto;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -106,7 +106,7 @@ public enum CafeteriaTypeEnum {
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select("div > table > tbody > tr");
 
-            List<StudentHallRequestDto> menus = new ArrayList<>();
+            List<StudentHallMenuRequestDto> menus = new ArrayList<>();
 
             for(Element element : elements) {
                 String menu = element.select(".th").text();
@@ -114,7 +114,7 @@ public enum CafeteriaTypeEnum {
                         .replace("원", "");
 
                 menus.add(
-                        StudentHallRequestDto.builder()
+                        StudentHallMenuRequestDto.builder()
                                 .name(menu)
                                 .price(price)
                                 .type(this)
@@ -123,7 +123,7 @@ public enum CafeteriaTypeEnum {
             }
 
             return menus.stream()
-                    .map(StudentHallRequestDto::toEntity)
+                    .map(StudentHallMenuRequestDto::toEntity)
                     .collect(Collectors.toList());
         }
     };
@@ -132,6 +132,13 @@ public enum CafeteriaTypeEnum {
     private Long id;
 
     abstract public List<Menu> crawlMenu(String url) throws IOException;
+
+    public static CafeteriaTypeEnum findBytitle(String title){
+        return Arrays.stream(CafeteriaTypeEnum.values())
+                .filter(cafeteriaType -> cafeteriaType.getTitle().equals(title))
+                .findAny()
+                .orElse(CafeteriaTypeEnum.STUDENT_HALL);
+    }
 
     CafeteriaTypeEnum(String title, Long id) {
         this.title = title;

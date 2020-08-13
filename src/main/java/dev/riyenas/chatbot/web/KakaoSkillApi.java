@@ -1,12 +1,12 @@
 package dev.riyenas.chatbot.web;
 
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
-import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
-import dev.riyenas.chatbot.service.notice.NoticeService;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaCrawlerService;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
+import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
+import dev.riyenas.chatbot.service.notice.NoticeService;
 import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseCarouselDto;
 import dev.riyenas.chatbot.web.payload.SkillPayload;
 import dev.riyenas.chatbot.web.payload.SkillResponse;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -91,9 +90,14 @@ public class KakaoSkillApi {
 
         log.info("식당(" + cafeteria + ") : " + payload.toString());
 
-        List<Menu> menus = cafeteriaService.findAll();
-
-        return new SkillResponseTemplate()
-                .addSimpleText(menus.toString());
+        return cafeteriaService.findByCafeteriaType(CafeteriaTypeEnum.findBytitle(cafeteria))
+                .addQuickReplies(
+                        Arrays.asList(
+                                QuickReplyEnum.MESSAGE.action("학생회관", "학생회관 학식 알려줘"),
+                                //QuickReplyEnum.MESSAGE.action("우정당", "우정당 학식 알려줘"),
+                                QuickReplyEnum.MESSAGE.action("군자관", "군자관 학식 알려줘"),
+                                QuickReplyEnum.MESSAGE.action("가든뷰", "가든뷰 학식 알려줘")
+                        )
+                );
     }
 }
