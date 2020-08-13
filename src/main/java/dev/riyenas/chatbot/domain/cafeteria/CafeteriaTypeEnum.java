@@ -1,8 +1,8 @@
-package dev.riyenas.chatbot.domain.restaurant;
+package dev.riyenas.chatbot.domain.cafeteria;
 
-import dev.riyenas.chatbot.web.dto.restaurant.GardenViewMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.restaurant.GunjagwanMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.restaurant.StudentHallRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.GardenViewMenuRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.GunjagwanMenuRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallMenuRequestDto;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
-public enum RestaurantTypeEnum {
+public enum CafeteriaTypeEnum {
     GARDEN_VIEW("가든뷰", 1L){
         @Override
         public List<Menu> crawlMenu(String url) throws IOException {
@@ -106,7 +106,7 @@ public enum RestaurantTypeEnum {
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select("div > table > tbody > tr");
 
-            List<StudentHallRequestDto> menus = new ArrayList<>();
+            List<StudentHallMenuRequestDto> menus = new ArrayList<>();
 
             for(Element element : elements) {
                 String menu = element.select(".th").text();
@@ -114,7 +114,7 @@ public enum RestaurantTypeEnum {
                         .replace("원", "");
 
                 menus.add(
-                        StudentHallRequestDto.builder()
+                        StudentHallMenuRequestDto.builder()
                                 .name(menu)
                                 .price(price)
                                 .type(this)
@@ -123,7 +123,7 @@ public enum RestaurantTypeEnum {
             }
 
             return menus.stream()
-                    .map(StudentHallRequestDto::toEntity)
+                    .map(StudentHallMenuRequestDto::toEntity)
                     .collect(Collectors.toList());
         }
     };
@@ -133,7 +133,14 @@ public enum RestaurantTypeEnum {
 
     abstract public List<Menu> crawlMenu(String url) throws IOException;
 
-    RestaurantTypeEnum(String title, Long id) {
+    public static CafeteriaTypeEnum findBytitle(String title){
+        return Arrays.stream(CafeteriaTypeEnum.values())
+                .filter(cafeteriaType -> cafeteriaType.getTitle().equals(title))
+                .findAny()
+                .orElse(CafeteriaTypeEnum.STUDENT_HALL);
+    }
+
+    CafeteriaTypeEnum(String title, Long id) {
         this.title = title;
         this.id = id;
     }
