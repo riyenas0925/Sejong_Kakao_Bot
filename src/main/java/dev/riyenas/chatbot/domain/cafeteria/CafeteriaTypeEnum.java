@@ -1,8 +1,8 @@
-package dev.riyenas.chatbot.domain.restaurant;
+package dev.riyenas.chatbot.domain.cafeteria;
 
-import dev.riyenas.chatbot.web.dto.restaurant.GardenViewMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.restaurant.GunjagwanMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.restaurant.StudentHallRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.GardenViewMenuRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.GunjagwanMenuRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallRequestDto;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
-public enum RestaurantTypeEnum {
+public enum CafeteriaTypeEnum {
     GARDEN_VIEW("가든뷰", 1L){
         @Override
         public List<Menu> crawlMenu(String url) throws IOException {
@@ -133,7 +133,7 @@ public enum RestaurantTypeEnum {
 
     abstract public List<Menu> crawlMenu(String url) throws IOException;
 
-    RestaurantTypeEnum(String title, Long id) {
+    CafeteriaTypeEnum(String title, Long id) {
         this.title = title;
         this.id = id;
     }

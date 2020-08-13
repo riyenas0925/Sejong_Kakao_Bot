@@ -1,8 +1,8 @@
-package dev.riyenas.chatbot.restaurant;
+package dev.riyenas.chatbot.cafeteria;
 
-import dev.riyenas.chatbot.domain.restaurant.Menu;
-import dev.riyenas.chatbot.web.dto.restaurant.GunjagwanMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.restaurant.StudentHallRequestDto;
+import dev.riyenas.chatbot.domain.cafeteria.Menu;
+import dev.riyenas.chatbot.web.dto.cafeteria.GunjagwanMenuRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallRequestDto;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @SpringBootTest
-public class RestaurantTest {
+public class CafeteriaTest {
 
     @Test
     @DisplayName("군자관, 가든뷰 메뉴날짜를 LocalDate로 변환")

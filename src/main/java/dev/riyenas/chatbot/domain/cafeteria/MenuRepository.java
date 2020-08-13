@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.domain.restaurant;
+package dev.riyenas.chatbot.domain.cafeteria;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

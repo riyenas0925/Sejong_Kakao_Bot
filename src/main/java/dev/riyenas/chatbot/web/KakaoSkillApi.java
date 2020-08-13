@@ -1,12 +1,12 @@
 package dev.riyenas.chatbot.web;
 
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
-import dev.riyenas.chatbot.domain.restaurant.Menu;
+import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
-import dev.riyenas.chatbot.service.restaurant.RestaurantCrawlerService;
-import dev.riyenas.chatbot.service.restaurant.RestaurantService;
+import dev.riyenas.chatbot.service.cafeteria.CafeteriaCrawlerService;
+import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
 import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseCarouselDto;
 import dev.riyenas.chatbot.web.payload.SkillPayload;
 import dev.riyenas.chatbot.web.payload.SkillResponse;
@@ -32,8 +32,8 @@ public class KakaoSkillApi {
     private final NoticeService noticeService;
     private final NoticeCrawlerService noticeCrawlerService;
     private final AirPollutionService airPollutionService;
-    private final RestaurantCrawlerService restaurantCrawlerService;
-    private final RestaurantService restaurantService;
+    private final CafeteriaCrawlerService cafeteriaCrawlerService;
+    private final CafeteriaService cafeteriaService;
 
     @GetMapping("notice/crawl")
     public void test() throws IOException {
@@ -79,19 +79,19 @@ public class KakaoSkillApi {
                 .addCarousel(Carousel.of(responseCarousel));
     }
 
-    @GetMapping("restaurant/crawl")
-    public void restaurantCrawl() throws IOException {
-        restaurantCrawlerService.restaurantCrawler();
+    @GetMapping("cafeteria/crawl")
+    public void cafeteriaCrawl() throws IOException {
+        cafeteriaCrawlerService.cafeteriaCrawler();
     }
 
-    @PostMapping("restaurant")
-    public SkillResponse restaurant(@RequestBody SkillPayload payload) {
+    @PostMapping("cafeteria")
+    public SkillResponse cafeteria(@RequestBody SkillPayload payload) {
         Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
-        String restaurant = params.get("sys_restaurant_type");
+        String cafeteria = params.get("sys_cafeteria_type");
 
-        log.info("식당(" + restaurant + ") : " + payload.toString());
+        log.info("식당(" + cafeteria + ") : " + payload.toString());
 
-        List<Menu> menus = restaurantService.findAll();
+        List<Menu> menus = cafeteriaService.findAll();
 
         return new SkillResponseTemplate()
                 .addSimpleText(menus.toString());

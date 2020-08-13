@@ -1,7 +1,7 @@
-package dev.riyenas.chatbot.web.dto.restaurant;
+package dev.riyenas.chatbot.web.dto.cafeteria;
 
-import dev.riyenas.chatbot.domain.restaurant.Menu;
-import dev.riyenas.chatbot.domain.restaurant.RestaurantTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.Menu;
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -16,7 +16,7 @@ public class StudentHallRequestDto {
     private String name;
     private String price;
     private Date date;
-    private RestaurantTypeEnum type;
+    private CafeteriaTypeEnum type;
 
     public Menu toEntity() {
         return Menu.builder()
@@ -28,7 +28,7 @@ public class StudentHallRequestDto {
     }
 
     @Builder
-    public StudentHallRequestDto(String name, String price, RestaurantTypeEnum type) {
+    public StudentHallRequestDto(String name, String price, CafeteriaTypeEnum type) {
         this.name = name;
         this.price = price;
         this.date = new Date();

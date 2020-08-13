@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.domain.restaurant;
+package dev.riyenas.chatbot.domain.cafeteria;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -27,10 +27,10 @@ public class Menu {
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private RestaurantTypeEnum type;
+    private CafeteriaTypeEnum type;
 
     @Builder
-    public Menu(Long id, String name, String price, RestaurantTypeEnum type, LocalDate localDate) {
+    public Menu(Long id, String name, String price, CafeteriaTypeEnum type, LocalDate localDate) {
         this.id = id;
         this.name = name;
         this.price = price;
