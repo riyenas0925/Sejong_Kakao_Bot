@@ -15,7 +15,7 @@ public class MenuRepositoryImpl extends QuerydslRepositorySupport implements Men
         final QMenu menu = QMenu.menu;
 
         return from(menu)
-                .where(menu.type.eq(type))
+                .where(menu.cafeteriaType.eq(type))
                 .fetch();
     }
 }

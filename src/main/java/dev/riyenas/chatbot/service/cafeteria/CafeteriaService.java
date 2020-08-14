@@ -1,15 +1,15 @@
 package dev.riyenas.chatbot.service.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaSkillResponseEnum;
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
-import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
+import dev.riyenas.chatbot.domain.cafeteria.*;
 import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @Getter
 @Service
@@ -23,6 +23,21 @@ public class CafeteriaService {
 
     public SkillResponseTemplate findByCafeteriaType(CafeteriaTypeEnum type) {
         List<Menu> menus = menuRepository.findByCafeteriaType(type);
-        return CafeteriaSkillResponseEnum.findByCafeteriaType(type).reponse(menus);
+        return CafeteriaSkillResponseEnum.findByCafeteriaType(type).response(menus);
+    }
+
+    public static TreeMap<MealTimeEnum, TreeMap<LocalDate, List<Menu>>> groupByMealTimeAndDate(List<Menu> menus) {
+        return menus.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Menu::getMealTimeType,
+                                TreeMap::new,
+                                Collectors.groupingBy(
+                                        Menu::getLocalDate,
+                                        TreeMap::new,
+                                        Collectors.toList()
+                                )
+                        )
+                );
     }
 }

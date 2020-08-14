@@ -1,6 +1,7 @@
 package dev.riyenas.chatbot.web.dto.cafeteria;
 
 import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.MealTimeEnum;
 import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +24,8 @@ public class StudentHallMenuRequestDto {
                 .name(name)
                 .price(price)
                 .localDate(dateToLocalDate(date))
-                .type(type)
+                .cafeteriaType(type)
+                .mealTimeType(MealTimeEnum.ANYTIME)
                 .build();
     }
 

@@ -47,4 +47,8 @@ public class BasicCard {
     public static BasicCard of(String description) {
         return new BasicCard(null, description, null, null);
     }
+
+    public static BasicCard of(String title, String description) {
+        return new BasicCard(title, description, null, null);
+    }
 }
