@@ -1,6 +1,6 @@
 package dev.riyenas.chatbot.domain.cafeteria;
 
-public enum MealTimeEnum {
+public enum MealTimeType {
     BREAKFAST("아침"),
     LUNCH("점심"),
     DINNER("저녁"),
@@ -8,7 +8,7 @@ public enum MealTimeEnum {
 
     private String value;
 
-    MealTimeEnum(String value) {
+    MealTimeType(String value) {
         this.value = value;
     }
 

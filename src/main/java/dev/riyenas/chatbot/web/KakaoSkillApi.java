@@ -1,6 +1,8 @@
 package dev.riyenas.chatbot.web;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaSkillResponse;
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
+import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaCrawlerService;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -90,7 +93,11 @@ public class KakaoSkillApi {
 
         log.info("식당(" + cafeteria + ") : " + payload.toString());
 
-        return cafeteriaService.findByCafeteriaType(CafeteriaTypeEnum.findBytitle(cafeteria))
+        CafeteriaType type = CafeteriaType.findBytitle(cafeteria);
+
+        List<Menu> menus = cafeteriaService.findByCafeteriaType(type);
+
+        return CafeteriaSkillResponse.findByCafeteriaType(type).response(menus)
                 .addQuickReplies(
                         Arrays.asList(
                                 QuickReplyEnum.MESSAGE.action("학생회관", "학생회관 학식 알려줘"),

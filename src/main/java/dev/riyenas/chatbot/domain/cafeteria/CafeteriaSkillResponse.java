@@ -9,9 +9,9 @@ import dev.riyenas.chatbot.web.skill.output.CarouselEnum;
 import java.time.LocalDate;
 import java.util.*;
 
-public enum CafeteriaSkillResponseEnum {
+public enum CafeteriaSkillResponse {
     SIMPLE_TEXT(Arrays.asList(
-            CafeteriaTypeEnum.STUDENT_HALL
+            CafeteriaType.STUDENT_HALL
     )){
         @Override
         public SkillResponseTemplate response(List<Menu> menus){
@@ -30,16 +30,16 @@ public enum CafeteriaSkillResponseEnum {
       }
     },
     CAROUSEL(Arrays.asList(
-            CafeteriaTypeEnum.GUNJAGWAN,
-            CafeteriaTypeEnum.GARDEN_VIEW
+            CafeteriaType.GUNJAGWAN,
+            CafeteriaType.GARDEN_VIEW
     )){
         @Override
         public SkillResponseTemplate response(List<Menu> menus){
 
-            TreeMap<MealTimeEnum, TreeMap<LocalDate, List<Menu>>> menuGroup =
+            TreeMap<MealTimeType, TreeMap<LocalDate, List<Menu>>> menuGroup =
                     CafeteriaService.groupByMealTimeAndDate(menus);
 
-            Map<MealTimeEnum, List<BasicCard>> basicCardGroup = new HashMap<>();
+            Map<MealTimeType, List<BasicCard>> basicCardGroup = new HashMap<>();
 
             menuGroup.forEach((mealTimeType, value1) -> {
                 List<BasicCard> basicCards = new ArrayList<>();
@@ -59,27 +59,27 @@ public enum CafeteriaSkillResponseEnum {
             return new SkillResponseTemplate()
                     .addCarousel(Carousel.of(
                             CarouselEnum.BASIC_CARD.getValue(),
-                            basicCardGroup.get(MealTimeEnum.LUNCH)
+                            basicCardGroup.get(MealTimeType.LUNCH)
 
                     ))
                     .addCarousel(Carousel.of(
                             CarouselEnum.BASIC_CARD.getValue(),
-                            basicCardGroup.get(MealTimeEnum.DINNER)
+                            basicCardGroup.get(MealTimeType.DINNER)
                     ));
         }
     };
 
-    private List<CafeteriaTypeEnum> cafeteriaTypes;
+    private List<CafeteriaType> cafeteriaTypes;
 
-    CafeteriaSkillResponseEnum(List<CafeteriaTypeEnum> cafeteriaTypes) {
+    CafeteriaSkillResponse(List<CafeteriaType> cafeteriaTypes) {
         this.cafeteriaTypes = cafeteriaTypes;
     }
 
-    public static CafeteriaSkillResponseEnum findByCafeteriaType(CafeteriaTypeEnum type){
-        return Arrays.stream(CafeteriaSkillResponseEnum.values())
+    public static CafeteriaSkillResponse findByCafeteriaType(CafeteriaType type){
+        return Arrays.stream(CafeteriaSkillResponse.values())
                 .filter(cafeteriaResponseType -> cafeteriaResponseType.cafeteriaTypes.contains(type))
                 .findAny()
-                .orElse(CafeteriaSkillResponseEnum.SIMPLE_TEXT);
+                .orElse(CafeteriaSkillResponse.SIMPLE_TEXT);
     }
 
     abstract public SkillResponseTemplate response(List<Menu> menus);

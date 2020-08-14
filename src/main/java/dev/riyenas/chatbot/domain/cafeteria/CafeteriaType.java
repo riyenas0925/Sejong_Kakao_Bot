@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
-public enum CafeteriaTypeEnum {
+public enum CafeteriaType {
     GARDEN_VIEW("가든뷰", 1L){
         @Override
         public List<Menu> crawlMenu(String url) throws IOException {
@@ -37,12 +37,12 @@ public enum CafeteriaTypeEnum {
                             .replace(" 중식", "");
                 }
 
-                MealTimeEnum mealTimeType = MealTimeEnum.ANYTIME;
+                MealTimeType mealTimeType = MealTimeType.ANYTIME;
 
                 if((i % 2) == 0) {
-                    mealTimeType = MealTimeEnum.LUNCH;
+                    mealTimeType = MealTimeType.LUNCH;
                 } else {
-                    mealTimeType = MealTimeEnum.DINNER;
+                    mealTimeType = MealTimeType.DINNER;
                 }
 
                 menus.add(
@@ -94,12 +94,12 @@ public enum CafeteriaTypeEnum {
                     .replace(" 중식", "");
                 }
 
-                MealTimeEnum mealTimeType = MealTimeEnum.ANYTIME;
+                MealTimeType mealTimeType = MealTimeType.ANYTIME;
 
                 if((i % 2) == 0) {
-                    mealTimeType = MealTimeEnum.LUNCH;
+                    mealTimeType = MealTimeType.LUNCH;
                 } else {
-                    mealTimeType = MealTimeEnum.DINNER;
+                    mealTimeType = MealTimeType.DINNER;
                 }
 
                 menus.add(
@@ -151,14 +151,14 @@ public enum CafeteriaTypeEnum {
 
     abstract public List<Menu> crawlMenu(String url) throws IOException;
 
-    public static CafeteriaTypeEnum findBytitle(String title){
-        return Arrays.stream(CafeteriaTypeEnum.values())
+    public static CafeteriaType findBytitle(String title){
+        return Arrays.stream(CafeteriaType.values())
                 .filter(cafeteriaType -> cafeteriaType.getTitle().equals(title))
                 .findAny()
-                .orElse(CafeteriaTypeEnum.STUDENT_HALL);
+                .orElse(CafeteriaType.STUDENT_HALL);
     }
 
-    CafeteriaTypeEnum(String title, Long id) {
+    CafeteriaType(String title, Long id) {
         this.title = title;
         this.id = id;
     }

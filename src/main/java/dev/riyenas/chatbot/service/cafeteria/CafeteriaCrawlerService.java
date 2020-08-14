@@ -1,7 +1,7 @@
 package dev.riyenas.chatbot.service.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaGroupEnum;
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaGroup;
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
 import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +19,9 @@ public class CafeteriaCrawlerService {
     private final MenuRepository menuRepository;
 
     public void cafeteriaCrawler() throws IOException {
-        for(CafeteriaGroupEnum group : CafeteriaGroupEnum.values()) {
-            for(CafeteriaTypeEnum cafeteria : group.getCafeteriaGroup()) {
+        for(CafeteriaGroup group : CafeteriaGroup.values()) {
+            for(CafeteriaType cafeteria : group.getCafeteriaGroup()) {
                 String url = group.getBaseUrl() + cafeteria.getId();
-
                 List<Menu> menus = cafeteria.crawlMenu(url);
                 menuRepository.saveAll(menus);
             }
