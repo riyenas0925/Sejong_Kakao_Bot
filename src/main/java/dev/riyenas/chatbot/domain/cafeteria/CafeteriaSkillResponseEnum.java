@@ -1,26 +1,24 @@
 package dev.riyenas.chatbot.domain.cafeteria;
 
-import dev.riyenas.chatbot.web.dto.cafeteria.CarouselMenuResponseDto;
-import dev.riyenas.chatbot.web.dto.cafeteria.SimpleTextMenuResponseDto;
+import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
 import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
+import dev.riyenas.chatbot.web.skill.output.BasicCard;
+import dev.riyenas.chatbot.web.skill.output.Carousel;
+import dev.riyenas.chatbot.web.skill.output.CarouselEnum;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.util.*;
 
 public enum CafeteriaSkillResponseEnum {
     SIMPLE_TEXT(Arrays.asList(
             CafeteriaTypeEnum.STUDENT_HALL
     )){
         @Override
-        public SkillResponseTemplate reponse(List<Menu> menus){
-            List<SimpleTextMenuResponseDto> responseDtos = menus.stream()
-                    .map(SimpleTextMenuResponseDto::new)
-                    .collect(Collectors.toList());
+        public SkillResponseTemplate response(List<Menu> menus){
 
             StringBuilder msg = new StringBuilder();
 
-            for(SimpleTextMenuResponseDto dto : responseDtos) {
+            for(Menu dto : menus) {
                 msg.append(dto.getName());
                 msg.append(" (");
                 msg.append(dto.getPrice());
@@ -36,24 +34,38 @@ public enum CafeteriaSkillResponseEnum {
             CafeteriaTypeEnum.GARDEN_VIEW
     )){
         @Override
-        public SkillResponseTemplate reponse(List<Menu> menus){
+        public SkillResponseTemplate response(List<Menu> menus){
 
-            List<CarouselMenuResponseDto> responseDtos = menus.stream()
-                    .map(CarouselMenuResponseDto::new)
-                    .collect(Collectors.toList());
+            TreeMap<MealTimeEnum, TreeMap<LocalDate, List<Menu>>> menuGroup =
+                    CafeteriaService.groupByMealTimeAndDate(menus);
 
-            StringBuilder msg = new StringBuilder();
+            Map<MealTimeEnum, List<BasicCard>> basicCardGroup = new HashMap<>();
 
-            for(CarouselMenuResponseDto dto : responseDtos) {
-                msg.append(dto.getDate());
-                msg.append(" : ");
-                msg.append(dto.getName());
-                msg.append("\n");
-            }
+            menuGroup.forEach((mealTimeType, value1) -> {
+                List<BasicCard> basicCards = new ArrayList<>();
+
+                value1.forEach((localDate, value2) -> {
+                    basicCards.add(
+                            BasicCard.of(
+                                    value2.get(0).getLocalDate() + " (" + mealTimeType.getValue() + ")",
+                                    value2.get(0).getName()
+                            )
+                    );
+                });
+
+                basicCardGroup.put(mealTimeType, basicCards);
+            });
 
             return new SkillResponseTemplate()
-                    .addSimpleText(msg.toString());
+                    .addCarousel(Carousel.of(
+                            CarouselEnum.BASIC_CARD.getValue(),
+                            basicCardGroup.get(MealTimeEnum.LUNCH)
 
+                    ))
+                    .addCarousel(Carousel.of(
+                            CarouselEnum.BASIC_CARD.getValue(),
+                            basicCardGroup.get(MealTimeEnum.DINNER)
+                    ));
         }
     };
 
@@ -70,5 +82,5 @@ public enum CafeteriaSkillResponseEnum {
                 .orElse(CafeteriaSkillResponseEnum.SIMPLE_TEXT);
     }
 
-    abstract public SkillResponseTemplate reponse(List<Menu> menus);
+    abstract public SkillResponseTemplate response(List<Menu> menus);
 }

@@ -37,12 +37,21 @@ public enum CafeteriaTypeEnum {
                             .replace(" 중식", "");
                 }
 
+                MealTimeEnum mealTimeType = MealTimeEnum.ANYTIME;
+
+                if((i % 2) == 0) {
+                    mealTimeType = MealTimeEnum.LUNCH;
+                } else {
+                    mealTimeType = MealTimeEnum.DINNER;
+                }
+
                 menus.add(
                         GardenViewMenuRequestDto.builder()
                                 .name(menu)
                                 .date(date)
                                 .price("-")
-                                .type(this)
+                                .cafeteriaType(this)
+                                .mealTimeType(mealTimeType)
                                 .build()
                 );
             }
@@ -59,7 +68,7 @@ public enum CafeteriaTypeEnum {
                     Menu.builder()
                             .name("우정당 메뉴")
                             .price("-")
-                            .type(this)
+                            .cafeteriaType(this)
                             .build()
             );
             return menus;
@@ -85,12 +94,21 @@ public enum CafeteriaTypeEnum {
                     .replace(" 중식", "");
                 }
 
+                MealTimeEnum mealTimeType = MealTimeEnum.ANYTIME;
+
+                if((i % 2) == 0) {
+                    mealTimeType = MealTimeEnum.LUNCH;
+                } else {
+                    mealTimeType = MealTimeEnum.DINNER;
+                }
+
                 menus.add(
                         GunjagwanMenuRequestDto.builder()
                                 .name(menu)
                                 .date(date)
                                 .price("-")
-                                .type(this)
+                                .cafeteriaType(this)
+                                .mealTimeType(mealTimeType)
                                 .build()
                 );
             }

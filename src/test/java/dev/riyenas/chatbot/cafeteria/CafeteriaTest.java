@@ -1,27 +1,30 @@
 package dev.riyenas.chatbot.cafeteria;
 
 import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.MealTimeEnum;
 import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
+import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
 import dev.riyenas.chatbot.web.dto.cafeteria.GunjagwanMenuRequestDto;
 import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallMenuRequestDto;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class CafeteriaTest {
+    private static Logger log = LoggerFactory.getLogger(CafeteriaTest.class);
 
     @Autowired
     private MenuRepository menuRepository;
@@ -66,13 +69,13 @@ public class CafeteriaTest {
         //given
         List<Menu> menus = Arrays.asList(
                 Menu.builder()
-                        .type(CafeteriaTypeEnum.GARDEN_VIEW)
+                        .cafeteriaType(CafeteriaTypeEnum.GARDEN_VIEW)
                         .build(),
                 Menu.builder()
-                        .type(CafeteriaTypeEnum.GUNJAGWAN)
+                        .cafeteriaType(CafeteriaTypeEnum.GUNJAGWAN)
                         .build(),
                 Menu.builder()
-                        .type(CafeteriaTypeEnum.GUNJAGWAN)
+                        .cafeteriaType(CafeteriaTypeEnum.GUNJAGWAN)
                         .build()
         );
 
@@ -83,5 +86,44 @@ public class CafeteriaTest {
 
         //that
         Assertions.assertEquals(GunjagwanMenus.size(), 2);
+    }
+
+    @Test
+    @DisplayName("Menu List를 날짜로 묶기")
+    public void menuListGroupByLocalDate() {
+        //given
+        List<Menu> menus = Arrays.asList(
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 20))
+                        .mealTimeType(MealTimeEnum.LUNCH)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 20))
+                        .mealTimeType(MealTimeEnum.DINNER)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 21))
+                        .mealTimeType(MealTimeEnum.LUNCH)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 21))
+                        .mealTimeType(MealTimeEnum.DINNER)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 22))
+                        .mealTimeType(MealTimeEnum.LUNCH)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 22))
+                        .mealTimeType(MealTimeEnum.DINNER)
+                        .build()
+        );
+
+        //when
+        TreeMap<MealTimeEnum, TreeMap<LocalDate, List<Menu>>> menuGroup =
+                CafeteriaService.groupByMealTimeAndDate(menus);
+
+        Assertions.assertEquals(menuGroup.get(MealTimeEnum.LUNCH).size(), 3);
+        Assertions.assertEquals(menuGroup.get(MealTimeEnum.DINNER).size(), 3);
     }
 }
