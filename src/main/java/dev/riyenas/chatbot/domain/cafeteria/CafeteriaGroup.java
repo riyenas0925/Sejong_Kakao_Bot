@@ -3,28 +3,28 @@ package dev.riyenas.chatbot.domain.cafeteria;
 import java.util.Arrays;
 import java.util.List;
 
-public enum CafeteriaGroupEnum {
+public enum CafeteriaGroup {
     CAFETERIA("http://m.sejong.ac.kr/front/cafeteria.do?type1=",
             Arrays.asList(
-                    CafeteriaTypeEnum.GARDEN_VIEW,
-                    CafeteriaTypeEnum.GUNJAGWAN,
-                    CafeteriaTypeEnum.WOOJUNGDANG
+                    CafeteriaType.GARDEN_VIEW,
+                    CafeteriaType.GUNJAGWAN,
+                    CafeteriaType.WOOJUNGDANG
             )
     ),CAFETERIA_2("http://m.sejong.ac.kr/front/cafeteria2.do?type1=",
             Arrays.asList(
-                    CafeteriaTypeEnum.STUDENT_HALL
+                    CafeteriaType.STUDENT_HALL
             )
     );
 
     private String baseUrl;
-    private List<CafeteriaTypeEnum> cafeteriaGroup;
+    private List<CafeteriaType> cafeteriaGroup;
 
-    CafeteriaGroupEnum(String baseUrl, List<CafeteriaTypeEnum> cafeteriaGroup) {
+    CafeteriaGroup(String baseUrl, List<CafeteriaType> cafeteriaGroup) {
         this.baseUrl = baseUrl;
         this.cafeteriaGroup = cafeteriaGroup;
     }
 
-    public List<CafeteriaTypeEnum> getCafeteriaGroup() {
+    public List<CafeteriaType> getCafeteriaGroup() {
         return cafeteriaGroup;
     }
 

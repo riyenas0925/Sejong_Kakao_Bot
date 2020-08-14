@@ -1,7 +1,7 @@
 package dev.riyenas.chatbot.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaTypeEnum;
-import dev.riyenas.chatbot.domain.cafeteria.MealTimeEnum;
+import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
+import dev.riyenas.chatbot.domain.cafeteria.MealTimeType;
 import dev.riyenas.chatbot.domain.cafeteria.Menu;
 import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
@@ -69,19 +69,19 @@ public class CafeteriaTest {
         //given
         List<Menu> menus = Arrays.asList(
                 Menu.builder()
-                        .cafeteriaType(CafeteriaTypeEnum.GARDEN_VIEW)
+                        .cafeteriaType(CafeteriaType.GARDEN_VIEW)
                         .build(),
                 Menu.builder()
-                        .cafeteriaType(CafeteriaTypeEnum.GUNJAGWAN)
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
                         .build(),
                 Menu.builder()
-                        .cafeteriaType(CafeteriaTypeEnum.GUNJAGWAN)
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
                         .build()
         );
 
         //when
         menuRepository.saveAll(menus);
-        List<Menu> GunjagwanMenus = menuRepository.findByCafeteriaType(CafeteriaTypeEnum.GUNJAGWAN);
+        List<Menu> GunjagwanMenus = menuRepository.findByCafeteriaType(CafeteriaType.GUNJAGWAN);
 
 
         //that
@@ -95,35 +95,35 @@ public class CafeteriaTest {
         List<Menu> menus = Arrays.asList(
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 20))
-                        .mealTimeType(MealTimeEnum.LUNCH)
+                        .mealTimeType(MealTimeType.LUNCH)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 20))
-                        .mealTimeType(MealTimeEnum.DINNER)
+                        .mealTimeType(MealTimeType.DINNER)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 21))
-                        .mealTimeType(MealTimeEnum.LUNCH)
+                        .mealTimeType(MealTimeType.LUNCH)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 21))
-                        .mealTimeType(MealTimeEnum.DINNER)
+                        .mealTimeType(MealTimeType.DINNER)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 22))
-                        .mealTimeType(MealTimeEnum.LUNCH)
+                        .mealTimeType(MealTimeType.LUNCH)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 22))
-                        .mealTimeType(MealTimeEnum.DINNER)
+                        .mealTimeType(MealTimeType.DINNER)
                         .build()
         );
 
         //when
-        TreeMap<MealTimeEnum, TreeMap<LocalDate, List<Menu>>> menuGroup =
+        TreeMap<MealTimeType, TreeMap<LocalDate, List<Menu>>> menuGroup =
                 CafeteriaService.groupByMealTimeAndDate(menus);
 
-        Assertions.assertEquals(menuGroup.get(MealTimeEnum.LUNCH).size(), 3);
-        Assertions.assertEquals(menuGroup.get(MealTimeEnum.DINNER).size(), 3);
+        Assertions.assertEquals(menuGroup.get(MealTimeType.LUNCH).size(), 3);
+        Assertions.assertEquals(menuGroup.get(MealTimeType.DINNER).size(), 3);
     }
 }

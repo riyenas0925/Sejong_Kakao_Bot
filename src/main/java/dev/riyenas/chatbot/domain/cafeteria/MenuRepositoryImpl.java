@@ -11,7 +11,7 @@ public class MenuRepositoryImpl extends QuerydslRepositorySupport implements Men
     }
 
     @Override
-    public List<Menu> findByCafeteriaType(CafeteriaTypeEnum type) {
+    public List<Menu> findByCafeteriaType(CafeteriaType type) {
         final QMenu menu = QMenu.menu;
 
         return from(menu)

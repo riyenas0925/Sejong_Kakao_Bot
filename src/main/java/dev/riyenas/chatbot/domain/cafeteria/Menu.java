@@ -27,14 +27,14 @@ public class Menu {
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private CafeteriaTypeEnum cafeteriaType;
+    private CafeteriaType cafeteriaType;
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private MealTimeEnum mealTimeType;
+    private MealTimeType mealTimeType;
 
     @Builder
-    public Menu(Long id, String name, String price, LocalDate localDate, CafeteriaTypeEnum cafeteriaType, MealTimeEnum mealTimeType){
+    public Menu(Long id, String name, String price, LocalDate localDate, CafeteriaType cafeteriaType, MealTimeType mealTimeType){
         this.id = id;
         this.name = name;
         this.price = price;
