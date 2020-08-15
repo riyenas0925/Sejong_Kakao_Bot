@@ -51,4 +51,8 @@ public class BasicCard {
     public static BasicCard of(String title, String description) {
         return new BasicCard(title, description, null, null);
     }
+
+    public static BasicCard of(String title, List<Button> buttons) {
+        return new BasicCard(title, null, null, buttons);
+    }
 }
