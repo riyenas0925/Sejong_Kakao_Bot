@@ -2,12 +2,14 @@ package dev.riyenas.chatbot.domain.cafeteria;
 
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
 import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
+import dev.riyenas.chatbot.web.skill.common.ButtonEnum;
 import dev.riyenas.chatbot.web.skill.output.BasicCard;
 import dev.riyenas.chatbot.web.skill.output.Carousel;
 import dev.riyenas.chatbot.web.skill.output.CarouselEnum;
 import lombok.extern.log4j.Log4j2;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.*;
 
 @Log4j2
@@ -46,10 +48,17 @@ public enum CafeteriaSkillResponse {
             menuGroup.forEach((mealTimeType, value1) -> {
                 List<BasicCard> basicCards = new ArrayList<>();
                 value1.forEach((localDate, value2) -> {
+                    String date = value2.get(0).getLocalDate().toString();
+                    String dayOfWeek = value2.get(0).getLocalDate()
+                            .getDayOfWeek()
+                            .getDisplayName(TextStyle.SHORT, Locale.KOREAN);
+
+                    String title = date + "(" + dayOfWeek + ") - " + mealTimeType.getValue();
+
                     basicCards.add(
                             BasicCard.of(
-                                    value2.get(0).getLocalDate() + " (" + mealTimeType.getValue() + ")",
-                                     value2.get(0).getName()
+                                    title,
+                                    value2.get(0).getName()
                             )
                     );
                 });
@@ -66,6 +75,16 @@ public enum CafeteriaSkillResponse {
                             basicCardGroup.get(type)
                     ));
                 };
+            }
+
+            if(basicCardGroup.isEmpty()) {
+                return new SkillResponseTemplate()
+                        .addBasicCard(BasicCard.of(
+                                "현재 메뉴 정보가 없거나 휴무일입니다."
+                                ,Arrays.asList(
+                                        ButtonEnum.WEBLINK.action("자세히 보기", "")
+                                )
+                        ));
             }
 
             return skillResponseTemplate;
