@@ -97,13 +97,15 @@ public class KakaoSkillApi {
 
         List<Menu> menus = cafeteriaService.findByCafeteriaType(type);
 
-        return CafeteriaSkillResponse.findByCafeteriaType(type).response(menus)
+        return new SkillResponseTemplate()
+                .addSimpleText(type.getTitle() + " 메뉴 입니다")
+                .addSkillResponse(CafeteriaSkillResponse.findByCafeteriaType(type).response(menus))
                 .addQuickReplies(
                         Arrays.asList(
-                                QuickReplyEnum.MESSAGE.action("학생회관", "학생회관 학식 알려줘"),
+                                QuickReplyEnum.MESSAGE.action("학생회관", "오늘 학생회관 메뉴 알려줘"),
                                 //QuickReplyEnum.MESSAGE.action("우정당", "우정당 학식 알려줘"),
-                                QuickReplyEnum.MESSAGE.action("군자관", "군자관 학식 알려줘"),
-                                QuickReplyEnum.MESSAGE.action("가든뷰", "가든뷰 학식 알려줘")
+                                QuickReplyEnum.MESSAGE.action("군자관", "오늘 군자관 메뉴 알려줘"),
+                                QuickReplyEnum.MESSAGE.action("가든뷰", "오늘 가든뷰 메뉴 알려줘")
                         )
                 );
     }

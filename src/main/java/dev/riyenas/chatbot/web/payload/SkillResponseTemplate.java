@@ -4,12 +4,14 @@ import dev.riyenas.chatbot.web.skill.common.QuickReply;
 import dev.riyenas.chatbot.web.skill.output.*;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j2
 @Getter
 @ToString
 public class SkillResponseTemplate extends SkillResponse{
@@ -65,6 +67,16 @@ public class SkillResponseTemplate extends SkillResponse{
                 quickReply
             );
         }
+
+        return this;
+    }
+
+    public SkillResponseTemplate addSkillResponse(SkillResponseTemplate skillResponse) {
+        List<Object> outputs = skillResponse.getTemplate().get("outputs");
+
+        this.template.get("outputs").addAll(
+                outputs
+        );
 
         return this;
     }

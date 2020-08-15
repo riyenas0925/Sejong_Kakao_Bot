@@ -126,4 +126,56 @@ public class CafeteriaTest {
         Assertions.assertEquals(menuGroup.get(MealTimeType.LUNCH).size(), 3);
         Assertions.assertEquals(menuGroup.get(MealTimeType.DINNER).size(), 3);
     }
+
+    @Test
+    public void findByCafeteriaTypeAndAfterToday() {
+        //given
+        List<Menu> menus = Arrays.asList(
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 14))
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 15))
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 16))
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .build()
+        );
+
+        //when
+        menuRepository.saveAll(menus);
+        List<Menu> menuList = menuRepository.findByCafeteriaTypeAndTodayGOE(
+                CafeteriaType.GUNJAGWAN, LocalDate.of(2020,8,15)
+        );
+
+        //that
+        Assertions.assertEquals(menuList.size(), 2);
+    }
+
+    @Test
+    public void findByCafeteriaTypeAndAfterTodayIsNull() {
+        //given
+        List<Menu> menus = Arrays.asList(
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 14))
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .build(),
+                Menu.builder()
+                        .localDate(LocalDate.of(2020, 8, 15))
+                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .build()
+        );
+
+        //when
+        menuRepository.saveAll(menus);
+        List<Menu> menuList = menuRepository.findByCafeteriaTypeAndTodayGOE(
+                CafeteriaType.GUNJAGWAN, LocalDate.of(2020,8,16)
+        );
+
+        //that
+        log.info(menuList.toString());
+    }
 }
