@@ -5,16 +5,18 @@ import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.output.BasicCard;
 import dev.riyenas.chatbot.web.skill.output.Carousel;
 import dev.riyenas.chatbot.web.skill.output.CarouselEnum;
+import lombok.extern.log4j.Log4j2;
 
 import java.time.LocalDate;
 import java.util.*;
 
+@Log4j2
 public enum CafeteriaSkillResponse {
     SIMPLE_TEXT(Arrays.asList(
             CafeteriaType.STUDENT_HALL
     )){
         @Override
-        public SkillResponseTemplate response(List<Menu> menus){
+        public SkillResponseTemplate response(List<Menu> menus) {
 
             StringBuilder msg = new StringBuilder();
 
@@ -34,7 +36,7 @@ public enum CafeteriaSkillResponse {
             CafeteriaType.GARDEN_VIEW
     )){
         @Override
-        public SkillResponseTemplate response(List<Menu> menus){
+        public SkillResponseTemplate response(List<Menu> menus) {
 
             TreeMap<MealTimeType, TreeMap<LocalDate, List<Menu>>> menuGroup =
                     CafeteriaService.groupByMealTimeAndDate(menus);
@@ -43,12 +45,11 @@ public enum CafeteriaSkillResponse {
 
             menuGroup.forEach((mealTimeType, value1) -> {
                 List<BasicCard> basicCards = new ArrayList<>();
-
                 value1.forEach((localDate, value2) -> {
                     basicCards.add(
                             BasicCard.of(
                                     value2.get(0).getLocalDate() + " (" + mealTimeType.getValue() + ")",
-                                    value2.get(0).getName()
+                                     value2.get(0).getName()
                             )
                     );
                 });
@@ -56,16 +57,18 @@ public enum CafeteriaSkillResponse {
                 basicCardGroup.put(mealTimeType, basicCards);
             });
 
-            return new SkillResponseTemplate()
-                    .addCarousel(Carousel.of(
-                            CarouselEnum.BASIC_CARD.getValue(),
-                            basicCardGroup.get(MealTimeType.LUNCH)
+            SkillResponseTemplate skillResponseTemplate = new SkillResponseTemplate();
 
-                    ))
-                    .addCarousel(Carousel.of(
+            for(MealTimeType type : MealTimeType.values()) {
+                if(basicCardGroup.get(type) != null) {
+                    skillResponseTemplate.addCarousel(Carousel.of(
                             CarouselEnum.BASIC_CARD.getValue(),
-                            basicCardGroup.get(MealTimeType.DINNER)
+                            basicCardGroup.get(type)
                     ));
+                };
+            }
+
+            return skillResponseTemplate;
         }
     };
 

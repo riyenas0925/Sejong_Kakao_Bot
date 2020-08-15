@@ -37,13 +37,8 @@ public enum CafeteriaType {
                             .replace(" 중식", "");
                 }
 
-                MealTimeType mealTimeType = MealTimeType.ANYTIME;
-
-                if((i % 2) == 0) {
-                    mealTimeType = MealTimeType.LUNCH;
-                } else {
-                    mealTimeType = MealTimeType.DINNER;
-                }
+                MealTimeType mealTimeType = ((i % 2) == 0) ? MealTimeType.LUNCH : MealTimeType.DINNER;
+                menu = menu.isEmpty() ? "메뉴 없음" : menu;
 
                 menus.add(
                         GardenViewMenuRequestDto.builder()
@@ -91,16 +86,11 @@ public enum CafeteriaType {
 
                 if(dateSeq.contains(i)){
                     date = element.select(".th").text()
-                    .replace(" 중식", "");
+                            .replace(" 중식", "");
                 }
 
-                MealTimeType mealTimeType = MealTimeType.ANYTIME;
-
-                if((i % 2) == 0) {
-                    mealTimeType = MealTimeType.LUNCH;
-                } else {
-                    mealTimeType = MealTimeType.DINNER;
-                }
+                MealTimeType mealTimeType = ((i % 2) == 0) ? MealTimeType.LUNCH : MealTimeType.DINNER;
+                menu = menu.isEmpty() ? "메뉴 없음" : menu;
 
                 menus.add(
                         GunjagwanMenuRequestDto.builder()

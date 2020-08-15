@@ -9,9 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+
+import static dev.riyenas.chatbot.web.dto.cafeteria.StudentHallMenuRequestDto.dateToLocalDate;
 
 @Getter
 @Service
@@ -25,6 +28,13 @@ public class CafeteriaService {
 
     public List<Menu> findByCafeteriaType(CafeteriaType type) {
         return menuRepository.findByCafeteriaType(type);
+    }
+
+    public List<Menu> findByCafeteriaTypeAndTodayGOE(CafeteriaType type) {
+        Date date = new Date();
+        List<Menu> menus = menuRepository.findByCafeteriaTypeAndTodayGOE(type, dateToLocalDate(date));
+
+        return menus;
     }
 
     public static TreeMap<MealTimeType, TreeMap<LocalDate, List<Menu>>> groupByMealTimeAndDate(List<Menu> menus) {
