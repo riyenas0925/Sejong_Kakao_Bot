@@ -1,9 +1,9 @@
 package dev.riyenas.chatbot.service.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
-import dev.riyenas.chatbot.domain.cafeteria.MealTimeType;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
-import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
+import dev.riyenas.chatbot.domain.menu.Menu;
+import dev.riyenas.chatbot.domain.menu.MenuRepository;
+import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
+import dev.riyenas.chatbot.domain.menu.cafeteria.MealTimeType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import static dev.riyenas.chatbot.web.dto.cafeteria.StudentHallMenuRequestDto.dateToLocalDate;
+import static dev.riyenas.chatbot.web.dto.cafeteria.MenuAndPriceRequestDto.dateToLocalDate;
 
 @Getter
 @Service
@@ -26,11 +26,11 @@ public class CafeteriaService {
         return menuRepository.findAll();
     }
 
-    public List<Menu> findByCafeteriaType(CafeteriaType type) {
+    public List<Menu> findByCafeteriaType(Cafeteria type) {
         return menuRepository.findByCafeteriaType(type);
     }
 
-    public List<Menu> findByCafeteriaTypeAndTodayGOE(CafeteriaType type) {
+    public List<Menu> findByCafeteriaTypeAndTodayGOE(Cafeteria type) {
         Date date = new Date();
         List<Menu> menus = menuRepository.findByCafeteriaTypeAndTodayGOE(type, dateToLocalDate(date));
 

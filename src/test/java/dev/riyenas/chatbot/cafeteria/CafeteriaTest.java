@@ -1,12 +1,12 @@
 package dev.riyenas.chatbot.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
-import dev.riyenas.chatbot.domain.cafeteria.MealTimeType;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
-import dev.riyenas.chatbot.domain.cafeteria.MenuRepository;
+import dev.riyenas.chatbot.domain.menu.Menu;
+import dev.riyenas.chatbot.domain.menu.MenuRepository;
+import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
+import dev.riyenas.chatbot.domain.menu.cafeteria.MealTimeType;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
-import dev.riyenas.chatbot.web.dto.cafeteria.GunjagwanMenuRequestDto;
-import dev.riyenas.chatbot.web.dto.cafeteria.StudentHallMenuRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.MenuAndPriceRequestDto;
+import dev.riyenas.chatbot.web.dto.cafeteria.MenuByDateAndMealTimeRequestDto;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +36,7 @@ public class CafeteriaTest {
         String dateInString = "화(08/11)";
 
         //when
-        GunjagwanMenuRequestDto dto = GunjagwanMenuRequestDto.builder()
+        MenuByDateAndMealTimeRequestDto dto = MenuByDateAndMealTimeRequestDto.builder()
                 .date(dateInString)
                 .build();
 
@@ -54,7 +54,7 @@ public class CafeteriaTest {
         Date date = new Date();
 
         //when
-        StudentHallMenuRequestDto dto = StudentHallMenuRequestDto.builder()
+        MenuAndPriceRequestDto dto = MenuAndPriceRequestDto.builder()
                 .build();
 
         Menu menu = dto.toEntity();
@@ -69,19 +69,19 @@ public class CafeteriaTest {
         //given
         List<Menu> menus = Arrays.asList(
                 Menu.builder()
-                        .cafeteriaType(CafeteriaType.GARDEN_VIEW)
+                        .cafeteria(Cafeteria.GARDEN_VIEW)
                         .build(),
                 Menu.builder()
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build(),
                 Menu.builder()
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build()
         );
 
         //when
         menuRepository.saveAll(menus);
-        List<Menu> GunjagwanMenus = menuRepository.findByCafeteriaType(CafeteriaType.GUNJAGWAN);
+        List<Menu> GunjagwanMenus = menuRepository.findByCafeteriaType(Cafeteria.GUNJAGWAN);
 
 
         //that
@@ -133,22 +133,22 @@ public class CafeteriaTest {
         List<Menu> menus = Arrays.asList(
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 14))
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 15))
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 16))
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build()
         );
 
         //when
         menuRepository.saveAll(menus);
         List<Menu> menuList = menuRepository.findByCafeteriaTypeAndTodayGOE(
-                CafeteriaType.GUNJAGWAN, LocalDate.of(2020,8,15)
+                Cafeteria.GUNJAGWAN, LocalDate.of(2020,8,15)
         );
 
         //that
@@ -161,18 +161,18 @@ public class CafeteriaTest {
         List<Menu> menus = Arrays.asList(
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 14))
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build(),
                 Menu.builder()
                         .localDate(LocalDate.of(2020, 8, 15))
-                        .cafeteriaType(CafeteriaType.GUNJAGWAN)
+                        .cafeteria(Cafeteria.GUNJAGWAN)
                         .build()
         );
 
         //when
         menuRepository.saveAll(menus);
         List<Menu> menuList = menuRepository.findByCafeteriaTypeAndTodayGOE(
-                CafeteriaType.GUNJAGWAN, LocalDate.of(2020,8,16)
+                Cafeteria.GUNJAGWAN, LocalDate.of(2020,8,16)
         );
 
         //that

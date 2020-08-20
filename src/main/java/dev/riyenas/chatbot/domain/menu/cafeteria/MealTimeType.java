@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.domain.cafeteria;
+package dev.riyenas.chatbot.domain.menu.cafeteria;
 
 public enum MealTimeType {
     BREAKFAST("아침"),

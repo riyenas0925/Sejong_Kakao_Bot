@@ -1,8 +1,8 @@
 package dev.riyenas.chatbot.web.dto.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
-import dev.riyenas.chatbot.domain.cafeteria.MealTimeType;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
+import dev.riyenas.chatbot.domain.menu.Menu;
+import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
+import dev.riyenas.chatbot.domain.menu.cafeteria.MealTimeType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,24 +13,24 @@ import java.util.Date;
 
 @Getter
 @ToString
-public class StudentHallMenuRequestDto {
+public class MenuAndPriceRequestDto {
     private String name;
     private String price;
     private Date date;
-    private CafeteriaType type;
+    private Cafeteria type;
 
     public Menu toEntity() {
         return Menu.builder()
                 .name(name)
                 .price(price)
                 .localDate(dateToLocalDate(date))
-                .cafeteriaType(type)
+                .cafeteria(type)
                 .mealTimeType(MealTimeType.ANYTIME)
                 .build();
     }
 
     @Builder
-    public StudentHallMenuRequestDto(String name, String price, CafeteriaType type) {
+    public MenuAndPriceRequestDto(String name, String price, Cafeteria type) {
         this.name = name;
         this.price = price;
         this.date = new Date();
