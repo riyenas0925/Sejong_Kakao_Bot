@@ -1,5 +1,6 @@
-package dev.riyenas.chatbot.domain.cafeteria;
+package dev.riyenas.chatbot.domain.menu.cafeteria;
 
+import dev.riyenas.chatbot.domain.menu.Menu;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
 import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.ButtonEnum;
@@ -15,7 +16,7 @@ import java.util.*;
 @Log4j2
 public enum CafeteriaSkillResponse {
     SIMPLE_TEXT(Arrays.asList(
-            CafeteriaType.STUDENT_HALL
+            Cafeteria.STUDENT_HALL
     )){
         @Override
         public SkillResponseTemplate response(List<Menu> menus) {
@@ -34,8 +35,8 @@ public enum CafeteriaSkillResponse {
       }
     },
     CAROUSEL(Arrays.asList(
-            CafeteriaType.GUNJAGWAN,
-            CafeteriaType.GARDEN_VIEW
+            Cafeteria.GUNJAGWAN,
+            Cafeteria.GARDEN_VIEW
     )){
         @Override
         public SkillResponseTemplate response(List<Menu> menus) {
@@ -91,15 +92,15 @@ public enum CafeteriaSkillResponse {
         }
     };
 
-    private List<CafeteriaType> cafeteriaTypes;
+    private List<Cafeteria> cafeterias;
 
-    CafeteriaSkillResponse(List<CafeteriaType> cafeteriaTypes) {
-        this.cafeteriaTypes = cafeteriaTypes;
+    CafeteriaSkillResponse(List<Cafeteria> cafeterias) {
+        this.cafeterias = cafeterias;
     }
 
-    public static CafeteriaSkillResponse findByCafeteriaType(CafeteriaType type){
+    public static CafeteriaSkillResponse findByCafeteriaType(Cafeteria type){
         return Arrays.stream(CafeteriaSkillResponse.values())
-                .filter(cafeteriaResponseType -> cafeteriaResponseType.cafeteriaTypes.contains(type))
+                .filter(cafeteriaResponseType -> cafeteriaResponseType.cafeterias.contains(type))
                 .findAny()
                 .orElse(CafeteriaSkillResponse.SIMPLE_TEXT);
     }

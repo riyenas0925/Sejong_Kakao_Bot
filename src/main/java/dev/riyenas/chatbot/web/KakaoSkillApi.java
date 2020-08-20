@@ -1,8 +1,8 @@
 package dev.riyenas.chatbot.web;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaSkillResponse;
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
+import dev.riyenas.chatbot.domain.menu.Menu;
+import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
+import dev.riyenas.chatbot.domain.menu.cafeteria.CafeteriaSkillResponse;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaCrawlerService;
@@ -93,7 +93,7 @@ public class KakaoSkillApi {
 
         log.info("식당(" + cafeteria + ") : " + payload.toString());
 
-        CafeteriaType type = CafeteriaType.findBytitle(cafeteria);
+        Cafeteria type = Cafeteria.findBytitle(cafeteria);
 
         List<Menu> menus = cafeteriaService.findByCafeteriaType(type);
 

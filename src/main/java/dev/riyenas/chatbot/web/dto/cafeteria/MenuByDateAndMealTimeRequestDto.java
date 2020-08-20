@@ -1,8 +1,8 @@
 package dev.riyenas.chatbot.web.dto.cafeteria;
 
-import dev.riyenas.chatbot.domain.cafeteria.CafeteriaType;
-import dev.riyenas.chatbot.domain.cafeteria.MealTimeType;
-import dev.riyenas.chatbot.domain.cafeteria.Menu;
+import dev.riyenas.chatbot.domain.menu.Menu;
+import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
+import dev.riyenas.chatbot.domain.menu.cafeteria.MealTimeType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -16,11 +16,11 @@ import java.util.Locale;
 
 @Getter
 @ToString
-public class GardenViewMenuRequestDto {
+public class MenuByDateAndMealTimeRequestDto {
     private String name;
     private String price;
     private String date;
-    private CafeteriaType cafeteriaType;
+    private Cafeteria cafeteria;
     private MealTimeType mealTimeType;
 
     public Menu toEntity() {
@@ -28,7 +28,7 @@ public class GardenViewMenuRequestDto {
                 .name(name)
                 .price(price)
                 .localDate(stringDateToLocalDate(date))
-                .cafeteriaType(cafeteriaType)
+                .cafeteria(cafeteria)
                 .mealTimeType(mealTimeType)
                 .build();
     }
@@ -43,12 +43,12 @@ public class GardenViewMenuRequestDto {
     }
 
     @Builder
-    public GardenViewMenuRequestDto(String name, String price, String date, CafeteriaType cafeteriaType,
-                                    MealTimeType mealTimeType) {
+    public MenuByDateAndMealTimeRequestDto(String name, String price, String date, Cafeteria cafeteria,
+                                           MealTimeType mealTimeType) {
         this.name = name;
         this.price = price;
         this.date = date;
-        this.cafeteriaType = cafeteriaType;
+        this.cafeteria = cafeteria;
         this.mealTimeType = mealTimeType;
     }
 }
