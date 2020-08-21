@@ -34,6 +34,8 @@ public class NoticeService {
 
     @Transactional
     public void saveAll(Map<NoticeTypeEnum, List<Notice>> noticeMap){
+        noticeRepository.deleteAll();
+
         for(NoticeTypeEnum type : noticeMap.keySet()) {
             noticeRepository.saveAll(noticeMap.get(type));
         }
