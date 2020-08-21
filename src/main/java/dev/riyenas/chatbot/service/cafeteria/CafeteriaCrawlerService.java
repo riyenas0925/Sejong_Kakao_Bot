@@ -29,6 +29,8 @@ public class CafeteriaCrawlerService {
     private final MenuRepository menuRepository;
 
     public void cafeteriaCrawler() throws IOException {
+        menuRepository.deleteAll();
+
         for(CafeteriaGroup group : CafeteriaGroup.values()) {
             for(Cafeteria cafeteria : group.getCafeteriaGroup()) {
                 String url = group.getBaseUrl() + cafeteria.getId();
