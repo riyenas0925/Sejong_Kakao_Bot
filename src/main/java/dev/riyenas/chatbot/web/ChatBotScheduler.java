@@ -16,7 +16,7 @@ import java.io.IOException;
 @Controller
 @EnableAsync
 @RequiredArgsConstructor
-public class KakaoSkillScheduler {
+public class ChatBotScheduler {
 
     private final NoticeService noticeService;
     private final NoticeCrawlerService noticeCrawlerService;
