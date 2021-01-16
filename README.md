@@ -1,12 +1,8 @@
 <h1 align="center">Sejong Kakao Bot</h1>
 
-[![Build Status](http://vscode.riyenas.dev/buildStatus/icon?job=Sejong_Kakao_Bot%2Fdevelop)](http://vscode.riyenas.dev/job/Sejong_Kakao_Bot/job/develop/)
-
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/32615702/71518315-929bbd00-28f5-11ea-8270-2ccd38f72422.gif">
+  <img src="https://user-images.githubusercontent.com/32615702/104815573-bad7c000-5858-11eb-8af9-083c655a7905.gif">
 </p>
-
-> :warning: 현재 새로운 버전(kakao i openbuilder 2.0)은 녹화 중에 있으며 [파이썬 장고로 개발한 이전 버전(Kakao Auto Reply v1.0)](https://github.com/riyenas0925/Sejong_Univ_Chef_Bot)영상 입니다.
 
 > 추가되었으면 하는 기능이 있으면 깃허브 이슈또는 riyenas0925@gmail.com으로 보내주시면 감사하겠습니다.
 
