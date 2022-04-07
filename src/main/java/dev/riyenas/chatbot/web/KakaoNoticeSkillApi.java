@@ -3,10 +3,9 @@ package dev.riyenas.chatbot.web;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
-import dev.riyenas.chatbot.web.payload.SkillPayload;
-import dev.riyenas.chatbot.web.payload.SkillResponse;
-import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
+import dev.riyenas.chatbot.web.skillpayload.SkillPayload;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -30,12 +29,12 @@ public class KakaoNoticeSkillApi {
     }
 
     @PostMapping("notice")
-    public SkillResponse sejongNotice(@RequestBody SkillPayload payload) {
+    public SkillResponseTemplate sejongNotice(@RequestBody SkillPayload payload) {
 
-        Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
+        Map<String, String> params = payload.getAction().getParams();
         String noticeTitle = params.get("sys_sejong_notice_type");
 
-        log.info(noticeTitle + " : " + payload.toString());
+        log.info(noticeTitle + " : " + payload);
 
         return new SkillResponseTemplate()
                 .addSimpleText("세종대학교 " + noticeTitle + " 공지사항 입니다.")

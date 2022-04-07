@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.web.payload;
+package dev.riyenas.chatbot.web.skillresponse;
 
 import lombok.Getter;
 import lombok.ToString;

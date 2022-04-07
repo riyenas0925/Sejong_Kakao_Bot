@@ -2,11 +2,11 @@ package dev.riyenas.chatbot.domain.menu.cafeteria;
 
 import dev.riyenas.chatbot.domain.menu.Menu;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
-import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.ButtonEnum;
 import dev.riyenas.chatbot.web.skill.output.BasicCard;
 import dev.riyenas.chatbot.web.skill.output.Carousel;
 import dev.riyenas.chatbot.web.skill.output.CarouselEnum;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.extern.log4j.Log4j2;
 
 import java.time.LocalDate;

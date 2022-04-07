@@ -5,10 +5,10 @@ import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
 import dev.riyenas.chatbot.domain.menu.cafeteria.CafeteriaSkillResponse;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaCrawlerService;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
-import dev.riyenas.chatbot.web.payload.SkillPayload;
-import dev.riyenas.chatbot.web.payload.SkillResponse;
-import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
+import dev.riyenas.chatbot.web.skillpayload.SkillPayload;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponse;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +34,11 @@ public class KakaoCafeteriaSkillApi {
 
     @PostMapping("cafeteria")
     public SkillResponse cafeteria(@RequestBody SkillPayload payload) {
-        Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
+        Map<String, String> params = payload.getAction().getParams();
+
         String cafeteria = params.get("sys_cafeteria_type");
 
-        log.info("식당(" + cafeteria + ") : " + payload.toString());
+        log.info("식당(" + cafeteria + ") : " + payload);
 
         Cafeteria type = Cafeteria.findBytitle(cafeteria);
 

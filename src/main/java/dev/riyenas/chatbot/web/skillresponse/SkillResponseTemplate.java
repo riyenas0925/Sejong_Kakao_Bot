@@ -1,4 +1,4 @@
-package dev.riyenas.chatbot.web.payload;
+package dev.riyenas.chatbot.web.skillresponse;
 
 import dev.riyenas.chatbot.web.skill.common.QuickReply;
 import dev.riyenas.chatbot.web.skill.output.*;

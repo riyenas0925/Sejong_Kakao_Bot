@@ -1,7 +1,7 @@
 package dev.riyenas.chatbot.skill;
 
-import dev.riyenas.chatbot.web.payload.SkillResponse;
-import dev.riyenas.chatbot.web.payload.SkillResponseData;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponse;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponseData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

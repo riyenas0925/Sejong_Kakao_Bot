@@ -2,10 +2,10 @@ package dev.riyenas.chatbot.web;
 
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseCarouselDto;
-import dev.riyenas.chatbot.web.payload.SkillPayload;
-import dev.riyenas.chatbot.web.payload.SkillResponse;
-import dev.riyenas.chatbot.web.payload.SkillResponseTemplate;
 import dev.riyenas.chatbot.web.skill.output.Carousel;
+import dev.riyenas.chatbot.web.skillpayload.SkillPayload;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponse;
+import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.codehaus.jettison.json.JSONException;
@@ -28,7 +28,7 @@ public class KakaoAirPollutionSkillApi {
     @PostMapping("airPollution")
     public SkillResponse airPollution(@RequestBody SkillPayload payload) throws IOException, JSONException {
 
-        Map<String, String> params = (Map<String, String>) payload.getAction().get("params");
+        Map<String, String> params = payload.getAction().getParams();
         String location = params.get("sys_air_station_location");
 
         log.info("미세먼지(" + location + ") : " + payload.toString());
