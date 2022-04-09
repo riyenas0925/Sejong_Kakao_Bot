@@ -1,5 +1,8 @@
 <h1 align="center">Sejong Kakao Bot</h1>
 
+> Kakao I OpenBuilder 비공식 라이브러리를 제작하고있습니다! 자세한 내용은 아래의 저장소를 참고해주세요 😸  
+> https://github.com/Sejong-OSS/Kakao_I_OpenBuilder_Library
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32615702/104815573-bad7c000-5858-11eb-8af9-083c655a7905.gif">
 </p>
