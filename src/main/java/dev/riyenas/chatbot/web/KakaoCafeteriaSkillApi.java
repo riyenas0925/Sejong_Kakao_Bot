@@ -1,12 +1,12 @@
 package dev.riyenas.chatbot.web;
 
+import dev.mini.kakaoiopenbuilder.skill.payload.SkillPayload;
 import dev.riyenas.chatbot.domain.menu.Menu;
 import dev.riyenas.chatbot.domain.menu.cafeteria.Cafeteria;
 import dev.riyenas.chatbot.domain.menu.cafeteria.CafeteriaSkillResponse;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaCrawlerService;
 import dev.riyenas.chatbot.service.cafeteria.CafeteriaService;
 import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
-import dev.riyenas.chatbot.web.skillpayload.SkillPayload;
 import dev.riyenas.chatbot.web.skillresponse.SkillResponse;
 import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;

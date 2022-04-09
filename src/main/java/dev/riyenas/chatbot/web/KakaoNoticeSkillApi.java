@@ -1,10 +1,10 @@
 package dev.riyenas.chatbot.web;
 
+import dev.mini.kakaoiopenbuilder.skill.payload.SkillPayload;
 import dev.riyenas.chatbot.domain.notice.NoticeTypeEnum;
 import dev.riyenas.chatbot.service.notice.NoticeCrawlerService;
 import dev.riyenas.chatbot.service.notice.NoticeService;
 import dev.riyenas.chatbot.web.skill.common.QuickReplyEnum;
-import dev.riyenas.chatbot.web.skillpayload.SkillPayload;
 import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -30,7 +30,6 @@ public class KakaoNoticeSkillApi {
 
     @PostMapping("notice")
     public SkillResponseTemplate sejongNotice(@RequestBody SkillPayload payload) {
-
         Map<String, String> params = payload.getAction().getParams();
         String noticeTitle = params.get("sys_sejong_notice_type");
 
