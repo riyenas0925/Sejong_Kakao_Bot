@@ -1,9 +1,9 @@
 package dev.riyenas.chatbot.web;
 
+import dev.mini.kakaoiopenbuilder.skill.payload.SkillPayload;
 import dev.riyenas.chatbot.service.airpollution.AirPollutionService;
 import dev.riyenas.chatbot.web.dto.airpollution.AirPollutionResponseCarouselDto;
 import dev.riyenas.chatbot.web.skill.output.Carousel;
-import dev.riyenas.chatbot.web.skillpayload.SkillPayload;
 import dev.riyenas.chatbot.web.skillresponse.SkillResponse;
 import dev.riyenas.chatbot.web.skillresponse.SkillResponseTemplate;
 import lombok.RequiredArgsConstructor;
